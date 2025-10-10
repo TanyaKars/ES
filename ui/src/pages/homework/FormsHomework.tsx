@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/header.tsx';
+import NavigationBar from '../components/NavigationBar.tsx';
 
 interface User {
   email: string;
@@ -71,6 +72,22 @@ const FormsHomework: React.FC = () => {
     setEnableConditional(false);
   };
 
+  useEffect(() => {
+    // Check if user is logged in
+    const userData = localStorage.getItem('user');
+    if (!userData) {
+      navigate('/login');
+      return;
+    }
+
+    try {
+      const parsedUser = JSON.parse(userData);
+      setUser(parsedUser);
+    } catch (error) {
+      navigate('/login');
+    }
+  }, [navigate]);
+
   if (!user) {
     return <div>Loading...</div>;
   }
@@ -79,15 +96,20 @@ const FormsHomework: React.FC = () => {
     <div className="homework-page">
       <Header user={user} title="Forms Homework: Advanced Form Elements Testing" />
       
-      <div className="homework-navigation">
-        <button 
-          onClick={() => navigate('/class/forms')} 
-          className="btn btn-secondary"
-          data-testid="back-to-class"
-        >
-          ← Back to Forms Class
-        </button>
-      </div>
+      <NavigationBar 
+        buttons={[
+          {
+            text: "← Back to Forms Class",
+            onClick: () => navigate('/class/forms'),
+            testId: "back-to-class"
+          },
+          {
+            text: "← Back to Dashboard",
+            onClick: () => navigate('/dashboard'),
+            testId: "back-to-dashboard"
+          }
+        ]}
+      />
 
       <div className="homework-content">
         <div className="challenges-overview">

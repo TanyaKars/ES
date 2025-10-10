@@ -358,6 +358,42 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.form-group.horizontal {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-group.horizontal label {
+  min-width: 120px;
+  margin-bottom: 0;
+  text-align: left;
+  font-weight: 500;
+}
+
+.form-group.horizontal textarea {
+  flex: 1;
+}
+
+.auto-expand {
+  width: 100%;
+  padding: 0.875rem;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  resize: none;
+  overflow: hidden;
+  min-height: 2.5rem;
+}
+
+.auto-expand:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
 .form-label {
   display: block;
   margin-bottom: 0.5rem;
@@ -529,6 +565,17 @@ body {
 .user-menu {
   display: flex;
   align-items: center;
+  gap: 1rem;
+}
+
+.navigation-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem 0;
+}
+
+.navigation-buttons {
+  display: flex;
   gap: 1rem;
 }
 
