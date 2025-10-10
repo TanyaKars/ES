@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@es/shared/*": ["shared/src/*"],
+      "@es/api/*": ["api/src/*"],
+      "@es/ui/*": ["ui/src/*"]
+    }
+  },
+  "include": [],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "packages/*/node_modules",
+    "packages/*/dist",
+    "packages/*/build"
+  ],
+  "references": [
+    {
+      "path": "./shared"
+    },
+    {
+      "path": "./api"
+    }
+  ]
+}

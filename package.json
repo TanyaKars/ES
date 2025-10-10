@@ -1,0 +1,39 @@
+{
+  "name": "es-monorepo",
+  "version": "1.0.0",
+  "description": "A monorepo with Prisma, Express API, and React UI",
+  "private": true,
+  "workspaces": [
+    "shared",
+    "api", 
+    "ui"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "dev": "concurrently \"npm run dev -w @es/api\" \"npm run dev -w @es/ui\"",
+    "dev:api": "npm run dev -w @es/api",
+    "dev:ui": "npm run dev -w @es/ui",
+    "db:migrate": "npm run db:migrate -w @es/api",
+    "db:generate": "npm run db:generate -w @es/api",
+    "db:studio": "npm run db:studio -w @es/api",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint api/src ui/src --ext .ts,.tsx",
+    "lint:api": "eslint api/src --ext .ts", 
+    "lint:ui": "eslint ui/src --ext .ts,.tsx",
+    "clean": "rm -rf node_modules packages/*/node_modules packages/*/dist"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "concurrently": "^8.2.0",
+    "eslint": "^8.50.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "typescript": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
