@@ -1137,6 +1137,60 @@ body {
   background-color: #f8f9fa;
 }
 
+/* Call to Action Section - Unified component for homework and completion */
+.call-to-action-section {
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Default styling (homework style) */
+.call-to-action-section {
+  background-color: #007bff;
+  color: white;
+}
+
+.call-to-action-section h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.call-to-action-section p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.call-to-action-section .btn {
+  margin-top: 1rem;
+}
+
+/* Completion variant (when icon is present) */
+.call-to-action-section:has(h2:first-child:contains("🎯")), 
+.call-to-action-section[data-testid="completion-section"] {
+  background-color: #28a745;
+  padding: 3rem;
+}
+
+.call-to-action-section:has(h2:first-child:contains("🎯")) h2,
+.call-to-action-section[data-testid="completion-section"] h2 {
+  font-size: 2.5rem;
+}
+
+.call-to-action-section:has(h2:first-child:contains("🎯")) .btn,
+.call-to-action-section[data-testid="completion-section"] .btn {
+  background-color: white;
+  color: #28a745;
+  border: 2px solid white;
+  margin-top: 2rem;
+}
+
+.call-to-action-section:has(h2:first-child:contains("🎯")) .btn:hover,
+.call-to-action-section[data-testid="completion-section"] .btn:hover {
+  background-color: #f8f9fa;
+}
+
 /* Form Elements Specific Styles */
 .dropdowns-container {
   display: grid;

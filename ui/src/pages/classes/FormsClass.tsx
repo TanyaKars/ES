@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/header.tsx';
-import NavigationBar from '../components/NavigationBar.tsx';
-import DropdownGroup from '../components/form-elements/DropdownGroup.tsx';
-import CheckboxGroup from '../components/form-elements/CheckboxGroup.tsx';
-import RadioGroup from '../components/form-elements/RadioGroup.tsx';
-import TextAreaGroup from '../components/form-elements/TextAreaGroup.tsx';
-import { ScenariosGrid } from '../components/form-elements/ScenarioCard.tsx';
+import Header from '../../components/Header.tsx';
+import NavigationBar from '../../components/NavigationBar.tsx';
+import DropdownGroup from '../../components/form-elements/DropdownGroup.tsx';
+import CheckboxGroup from '../../components/form-elements/CheckboxGroup.tsx';
+import RadioGroup from '../../components/form-elements/RadioGroup.tsx';
+import TextAreaGroup from '../../components/form-elements/TextAreaGroup.tsx';
+import ScenariosGrid from '../../components/ScenariosGrid.tsx';
+import CallToAction from '../../components/CallToAction.tsx';
 import {
   formsClassDropdowns,
   formsClassCheckboxes,
@@ -15,7 +16,8 @@ import {
   formsClassTextAreas,
   formsClassScenarios,
   formsClassInitialState
-} from '../../data/formsClassData';
+} from '../../data/forms/formsClassData';
+import { callToActionConfigs } from '../../data/callToActionData.ts';
 
 interface User {
   email: string;
@@ -172,17 +174,7 @@ const FormsClass: React.FC = () => {
           scenarios={formsClassScenarios}
         />
 
-        <div className="homework-section">
-          <h2>Ready for Homework?</h2>
-          <p>Practice your skills with unique challenges and edge cases!</p>
-          <button 
-            onClick={() => navigate('/homework/forms')}
-            className="btn btn-primary btn-large"
-            data-testid="homework-button"
-          >
-            Start Forms Homework →
-          </button>
-        </div>
+        <CallToAction {...callToActionConfigs.formsHomework} />
       </div>
     </div>
   );

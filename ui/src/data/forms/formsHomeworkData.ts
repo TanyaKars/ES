@@ -1,6 +1,6 @@
-import { CheckboxOption } from '../pages/components/form-elements/CheckboxGroup';
-import { RadioOption } from '../pages/components/form-elements/RadioGroup';
-import { DropdownConfig } from '../pages/components/form-elements/DropdownGroup';
+import { CheckboxOption } from '../../components/form-elements/CheckboxGroup';
+import { RadioOption } from '../../components/form-elements/RadioGroup';
+import { DropdownConfig } from '../../components/form-elements/DropdownGroup';
 
 export const formsHomeworkCheckboxes: CheckboxOption[] = [
   { id: 'option1', label: 'Option 1', testId: 'option1-checkbox', labelTestId: 'option1-label' },

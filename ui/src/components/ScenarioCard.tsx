@@ -29,22 +29,4 @@ const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
   );
 };
 
-interface ScenariosGridProps {
-  title: string;
-  scenarios: ScenarioConfig[];
-}
-
-export const ScenariosGrid: React.FC<ScenariosGridProps> = ({ title, scenarios }) => {
-  return (
-    <div className="testing-scenarios">
-      <h2>{title}</h2>
-      <div className="scenarios-grid">
-        {scenarios.map((scenario) => (
-          <ScenarioCard key={scenario.id} scenario={scenario} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
 export default ScenarioCard;

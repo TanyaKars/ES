@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/header.tsx';
-import NavigationBar from '../components/NavigationBar.tsx';
+import Header from '../../components/Header.tsx';
+import NavigationBar from '../../components/NavigationBar.tsx';
+import CallToAction from '../../components/CallToAction.tsx';
+import { callToActionConfigs } from '../../data/callToActionData.ts';
 
 interface User {
   email: string;
@@ -410,17 +412,7 @@ const FormsHomework: React.FC = () => {
           </div>
         </div>
 
-        <div className="completion-section" data-testid="completion-section">
-          <h2>🎯 Assignment Complete!</h2>
-          <p>Great work! You've mastered form elements testing. Ready for the next challenge?</p>
-          <button 
-            onClick={() => navigate('/class/iframes')}
-            className="btn btn-primary btn-large"
-            data-testid="next-class-button"
-          >
-            Continue to Next Class: iFrames →
-          </button>
-        </div>
+        <CallToAction {...callToActionConfigs.formsComplete} />
       </div>
     </div>
   );

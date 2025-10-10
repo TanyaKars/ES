@@ -1,8 +1,8 @@
-import { DropdownConfig } from '../pages/components/form-elements/DropdownGroup';
-import { CheckboxOption } from '../pages/components/form-elements/CheckboxGroup';
-import { RadioOption } from '../pages/components/form-elements/RadioGroup';
-import { TextAreaConfig } from '../pages/components/form-elements/TextAreaGroup';
-import { ScenarioConfig } from '../pages/components/form-elements/ScenarioCard';
+import { DropdownConfig } from '../../components/form-elements/DropdownGroup';
+import { CheckboxOption } from '../../components/form-elements/CheckboxGroup';
+import { RadioOption } from '../../components/form-elements/RadioGroup';
+import { TextAreaConfig } from '../../components/form-elements/TextAreaGroup';
+import { ScenarioConfig } from '../../components/ScenarioCard';
 
 export const formsClassDropdowns: DropdownConfig[] = [
   {
