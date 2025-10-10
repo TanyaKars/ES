@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/header.tsx';
+
+interface User {
+  email: string;
+  firstName?: string;
+  lastName?: string;
+}
 
 const FormsClass: React.FC = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState<User | null>(null);
   
   // Dropdown states
   const [selectedDropdown1, setSelectedDropdown1] = useState('');
@@ -30,6 +38,22 @@ const FormsClass: React.FC = () => {
   // Text area state
   const [textAreaContent, setTextAreaContent] = useState('');
   const [comments, setComments] = useState('');
+
+  useEffect(() => {
+    // Check if user is logged in
+    const userData = localStorage.getItem('user');
+    if (!userData) {
+      navigate('/login');
+      return;
+    }
+
+    try {
+      const parsedUser = JSON.parse(userData);
+      setUser(parsedUser);
+    } catch (error) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   const handleCheckboxChange = (name: string) => {
     setCheckboxes(prev => ({
@@ -59,9 +83,15 @@ const FormsClass: React.FC = () => {
     setComments('');
   };
 
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="class-page">
-      <header className="class-header">
+      <Header user={user} title="Class 1: Dropdown Menu, Checkbox & Radio Button" />
+      
+      <div className="class-navigation">
         <button 
           onClick={() => navigate('/dashboard')} 
           className="btn btn-secondary"
@@ -69,22 +99,9 @@ const FormsClass: React.FC = () => {
         >
           ← Back to Dashboard
         </button>
-        <h1 data-testid="class-title">Class 1: Forms - Dropdown Menu(s), Checkboxe(s) & Radio Button(s)</h1>
-      </header>
+      </div>
 
       <div className="class-content">
-        <div className="lesson-section">
-          <h2>Learning Objectives</h2>
-          <ul>
-            <li>Test dropdown menu interactions and selections</li>
-            <li>Test checkbox interactions (checked, unchecked, disabled)</li>
-            <li>Test radio button group selections</li>
-            <li>Handle disabled form elements appropriately</li>
-            <li>Test text area input and validation</li>
-            <li>Verify form element states and combinations</li>
-          </ul>
-        </div>
-
         <div className="practice-section">
           <h2>Interactive Form Elements</h2>
           

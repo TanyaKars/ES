@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from './components/header.tsx';
 
 interface User {
   email: string;
@@ -7,9 +8,63 @@ interface User {
   lastName?: string;
 }
 
+interface Course {
+  id: string;
+  classNumber: number;
+  title: string;
+  description: string;
+  icon: string;
+  route: string;
+  testId: string;
+  progress: number;
+}
+
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
+
+  const courses: Course[] = [
+    {
+      id: 'forms',
+      classNumber: 1,
+      title: 'Forms',
+      description: 'Learn to test forms, dropdowns, checkboxes, radio buttons, and disabled elements',
+      icon: '📝',
+      route: '/class/forms',
+      testId: 'forms-course',
+      progress: 0
+    },
+    {
+      id: 'alerts',
+      classNumber: 2,
+      title: 'Alerts & Prompts',
+      description: 'Handle JavaScript alerts, confirms, and prompts',
+      icon: '⚠️',
+      route: '/class/alerts',
+      testId: 'alerts-course',
+      progress: 0
+    },
+    {
+      id: 'iframes',
+      classNumber: 3,
+      title: 'iFrames',
+      description: 'Test content within embedded frames',
+      icon: '🖼️',
+      route: '/class/iframes',
+      testId: 'iframes-course',
+      progress: 0
+    },
+    {
+      id: 'mouse-actions',
+      classNumber: 4,
+      title: 'Mouse Actions',
+      description: 'Click, hover, drag, and double-click interactions',
+      icon: '🖱️',
+      route: '/class/mouse-actions',
+      testId: 'mouse-actions-course',
+      progress: 0
+    }
+  ];
 
   useEffect(() => {
     // Check if user is logged in
@@ -27,34 +82,13 @@ const Dashboard: React.FC = () => {
     }
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    navigate('/');
-  };
-
   if (!user) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="dashboard-page">
-      <header className="dashboard-header">
-        <div className="header-content">
-          <h1 data-testid="dashboard-title">QA Academy Dashboard</h1>
-          <div className="user-menu">
-            <span data-testid="user-welcome">
-              Welcome, {user.firstName || user.email}!
-            </span>
-            <button 
-              onClick={handleLogout} 
-              className="btn btn-secondary"
-              data-testid="logout-button"
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-      </header>
+      <Header user={user} title="QA Academy Dashboard" />
 
       <main className="dashboard-main">
         <div className="dashboard-container">
@@ -64,100 +98,26 @@ const Dashboard: React.FC = () => {
           </div>
 
           <div className="courses-grid">
-            <div className="course-card" data-testid="forms-course">
-              <div className="course-icon">�</div>
-              <h3>Class 1: Forms</h3>
-              <p>Learn to test login forms and form validation</p>
-              <div className="course-progress">
-                <div className="progress-bar">
-                  <div className="progress-fill" style={{ width: '0%' }}></div>
+            {courses.map((course) => (
+              <div key={course.id} className="course-card" data-testid={course.testId}>
+                <div className="course-icon">{course.icon}</div>
+                <h3>Class {course.classNumber}: {course.title}</h3>
+                <p>{course.description}</p>
+                <div className="course-progress">
+                  <div className="progress-bar">
+                    <div className="progress-fill" style={{ width: `${course.progress}%` }}></div>
+                  </div>
+                  <span>{course.progress}% Complete</span>
                 </div>
-                <span>0% Complete</span>
+                <button 
+                  className="btn btn-primary" 
+                  onClick={() => navigate(course.route)}
+                  data-testid={`start-${course.id}-class`}
+                >
+                  Start Class
+                </button>
               </div>
-              <button 
-                className="btn btn-primary" 
-                onClick={() => navigate('/class/forms')}
-                data-testid="start-forms-class"
-              >
-                Start Class
-              </button>
-            </div>
-
-            <div className="course-card" data-testid="form-elements-course">
-              <div className="course-icon">☑️</div>
-              <h3>Class 2: Form Elements</h3>
-              <p>Checkboxes, radio buttons, and disabled elements</p>
-              <div className="course-progress">
-                <div className="progress-bar">
-                  <div className="progress-fill" style={{ width: '0%' }}></div>
-                </div>
-                <span>0% Complete</span>
-              </div>
-              <button 
-                className="btn btn-primary" 
-                onClick={() => navigate('/class/form-elements')}
-                data-testid="start-form-elements-class"
-              >
-                Start Class
-              </button>
-            </div>
-
-            <div className="course-card" data-testid="iframes-course">
-              <div className="course-icon">�️</div>
-              <h3>Class 3: iFrames</h3>
-              <p>Test content within embedded frames</p>
-              <div className="course-progress">
-                <div className="progress-bar">
-                  <div className="progress-fill" style={{ width: '0%' }}></div>
-                </div>
-                <span>0% Complete</span>
-              </div>
-              <button 
-                className="btn btn-primary" 
-                onClick={() => navigate('/class/iframes')}
-                data-testid="start-iframes-class"
-              >
-                Start Class
-              </button>
-            </div>
-
-            <div className="course-card" data-testid="alerts-course">
-              <div className="course-icon">⚠️</div>
-              <h3>Class 4: Alerts & Prompts</h3>
-              <p>Handle JavaScript alerts, confirms, and prompts</p>
-              <div className="course-progress">
-                <div className="progress-bar">
-                  <div className="progress-fill" style={{ width: '0%' }}></div>
-                </div>
-                <span>0% Complete</span>
-              </div>
-              <button 
-                className="btn btn-primary" 
-                onClick={() => navigate('/class/alerts')}
-                data-testid="start-alerts-class"
-              >
-                Start Class
-              </button>
-            </div>
-
-            <div className="course-card" data-testid="mouse-actions-course">
-              <div className="course-icon">�️</div>
-              <h3>Class 5: Mouse Actions</h3>
-              <p>Click, hover, drag, and double-click interactions</p>
-              <div className="course-progress">
-                <div className="progress-bar">
-                  <div className="progress-fill" style={{ width: '0%' }}></div>
-                </div>
-                <span>0% Complete</span>
-              </div>
-              <button 
-                className="btn btn-primary" 
-                onClick={() => navigate('/class/mouse-actions')}
-                data-testid="start-mouse-actions-class"
-              >
-                Start Class
-              </button>
-            </div>
+            ))}
           </div>
 
           <div className="practice-section" data-testid="practice-section">
