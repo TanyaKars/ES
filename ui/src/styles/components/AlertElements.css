@@ -13,11 +13,14 @@
 .alert-card {
   background-color: #fff;
   padding: 2rem;
+  padding-bottom: 80px; /* Extra space for the button */
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   text-align: center;
   border: 2px solid #e9ecef;
   transition: all 0.2s ease;
+  position: relative;
+  min-height: 320px; /* Ensure consistent card height */
 }
 
 .alert-card:hover {
@@ -52,7 +55,11 @@
 }
 
 .alert-button-container {
-  margin-top: 1rem;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 4rem); /* Account for card padding */
 }
 
 .alert-button-container .btn {
@@ -60,6 +67,7 @@
   font-size: 1.1rem;
   font-weight: bold;
   min-width: 120px;
+  width: 100%;
 }
 
 /* Prompt Result Display */
@@ -293,9 +301,12 @@
   background: var(--background-white);
   border-radius: var(--radius-md);
   padding: 25px;
+  padding-bottom: 60px; /* Extra space for the button */
   box-shadow: var(--shadow-base);
   transition: all 0.3s ease;
   border: 2px solid transparent;
+  position: relative;
+  min-height: 280px; /* Ensure consistent card height */
 }
 
 .scenario-card:hover {
@@ -359,11 +370,57 @@
 
 .scenario-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin-top: 20px;
   padding-top: 20px;
+  padding-right: 120px; /* Space for the button */
   border-top: 1px solid #ecf0f1;
+}
+
+.start-scenario-btn {
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+.start-scenario-btn:hover {
+  background: linear-gradient(45deg, #2980b9, #1f618d);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.start-scenario-btn:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.points {
+  color: #7f8c8d;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.attempts {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #ecf0f1;
+  color: #7f8c8d;
+  font-size: 0.85rem;
+  text-align: center;
 }
 
 .points-earned {
@@ -463,6 +520,37 @@
   
   .scenarios-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .scenario-card {
+    min-height: 240px;
+    padding-bottom: 55px;
+  }
+  
+  .scenario-footer {
+    padding-right: 100px;
+  }
+  
+  .start-scenario-btn {
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+  
+  .alert-card {
+    min-height: 280px;
+    padding-bottom: 70px;
+  }
+  
+  .alert-button-container {
+    bottom: 15px;
+    width: calc(100% - 3rem);
+  }
+  
+  .alert-button-container .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
   }
   
   .info-cards {

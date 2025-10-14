@@ -1,38 +1,31 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import Header from '../../components/Header';
-import NavigationBar from '../../components/NavigationBar';
-import StatCard from '../../components/alert-elements/StatCard';
+import HomeworkLayout from '../../components/homework/HomeworkLayout';
+import HomeworkResults from '../../components/homework/HomeworkResults';
 import InfoCard from '../../components/alert-elements/InfoCard';
 import AlertHomeworkScenarioCard from '../../components/alert-elements/AlertHomeworkScenarioCard';
-import { alertsHomeworkScenarios, homeworkConfig, UserStats } from '../../data/alerts/alertsHomeworkData';
+import { useAuth } from '../../hooks/useAuth';
+import { useHomeworkState } from '../../hooks/useHomeworkState';
+import { alertsHomeworkScenarios, homeworkConfig } from '../../data/alerts/alertsHomeworkData';
 
 const AlertsHomework: React.FC = () => {
-  const navigate = useNavigate();
-  const [userStats, setUserStats] = useState<UserStats>({
-    totalPoints: 0,
-    completedScenarios: [],
-    attempts: {},
-    bestScore: 0
+  const { user, isLoading } = useAuth();
+  const {
+    isStarted,
+    showResults,
+    completedScenarios,
+    totalPoints,
+    startHomework,
+    submitHomework,
+    completeScenario
+  } = useHomeworkState({
+    maxPoints: homeworkConfig.maxPoints,
+    totalScenarios: alertsHomeworkScenarios.length
   });
   
   const [currentScenario, setCurrentScenario] = useState<string | null>(null);
-  const [showResults, setShowResults] = useState(false);
-  const [isStarted, setIsStarted] = useState(false);
-
-  const startHomework = () => {
-    setIsStarted(true);
-    setShowResults(false);
-    setUserStats(prev => ({
-      ...prev,
-      totalPoints: 0,
-      completedScenarios: []
-    }));
-  };
 
   const startScenario = (scenarioId: string) => {
-    if (userStats.completedScenarios.includes(scenarioId)) {
+    if (completedScenarios.includes(scenarioId)) {
       if (!confirm('You have already completed this scenario. Do you want to retry?')) {
         return;
       }
@@ -82,7 +75,7 @@ const AlertsHomework: React.FC = () => {
       // Step 3: Welcome alert
       alert(`Welcome, ${name}! You have successfully completed the sequential alert chain.`);
       
-      completeScenario('sequential-alerts');
+      completeScenario('sequential-alerts', 20);
     } catch (error) {
       alert('An error occurred during the scenario.');
       setCurrentScenario(null);
@@ -127,7 +120,7 @@ const AlertsHomework: React.FC = () => {
       alert(`Excellent! ${interest} is a great area to focus on. Welcome to your QA journey!`);
     }
     
-    completeScenario('conditional-flow');
+    completeScenario('conditional-flow', 25);
   };
 
   // Calculator Challenge Scenario
@@ -184,7 +177,7 @@ const AlertsHomework: React.FC = () => {
       continueCalculating = confirm('Do you want to perform another calculation?');
     }
     
-    completeScenario('calculator-challenge');
+    completeScenario('calculator-challenge', 30);
   };
 
   // Registration Flow Scenario
@@ -223,7 +216,7 @@ const AlertsHomework: React.FC = () => {
     }
 
     alert(`Registration successful! Welcome, ${username}!`);
-    completeScenario('registration-flow');
+    completeScenario('registration-flow', 20);
   };
 
   // AJAX Sequence Scenario
@@ -284,7 +277,7 @@ const AlertsHomework: React.FC = () => {
         
         setTimeout(() => {
           alert('AJAX sequence completed successfully! All operations processed.');
-          completeScenario('ajax-sequence');
+          completeScenario('ajax-sequence', 25);
         }, 4000);
       } else {
         alert('AJAX sequence incomplete. Try again to complete all operations.');
@@ -293,146 +286,73 @@ const AlertsHomework: React.FC = () => {
     }, 3000);
   };
 
-  const completeScenario = (scenarioId: string) => {
-    const scenario = alertsHomeworkScenarios.find(s => s.id === scenarioId);
-    if (!scenario) return;
 
-    setUserStats(prev => {
-      const newStats = {
-        ...prev,
-        totalPoints: prev.totalPoints + scenario.points,
-        completedScenarios: [...prev.completedScenarios.filter(id => id !== scenarioId), scenarioId],
-        attempts: {
-          ...prev.attempts,
-          [scenarioId]: (prev.attempts[scenarioId] || 0) + 1
-        }
-      };
-      newStats.bestScore = Math.max(newStats.bestScore, newStats.totalPoints);
-      return newStats;
-    });
 
-    setCurrentScenario(null);
-    alert(`Scenario completed! You earned ${scenario.points} points.`);
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  const submitHomework = () => {
-    setShowResults(true);
-    
-    const percentage = (userStats.totalPoints / homeworkConfig.maxPoints) * 100;
-    const passed = percentage >= homeworkConfig.passingScore;
-    
-    alert(`Homework submitted!\nTotal Points: ${userStats.totalPoints}/${homeworkConfig.maxPoints}\nScore: ${percentage.toFixed(1)}%\nStatus: ${passed ? 'PASSED' : 'FAILED'}`);
-  };
+  if (!user) {
+    return <div>Authentication required</div>;
+  }
 
   return (
-    <div className="alerts-homework">
-      <Header user={{ email: 'student@example.com', firstName: 'Student' }} />
-      <NavigationBar 
-        buttons={[
-          {
-            text: "← Back to Alerts Class",
-            onClick: () => navigate('/class/alerts'),
-            testId: "back-to-class"
-          },
-          {
-            text: "← Back to Dashboard",
-            onClick: () => navigate('/dashboard'),
-            testId: "back-to-dashboard"
-          }
-        ]}
-      />
-      <div className="homework-container">
-        <div className="homework-header">
-          <h1>Alerts & Prompts - Homework Assignment</h1>
-          <p>Complete complex alert scenarios to test your understanding. Each scenario builds on the concepts learned in class.</p>
-          
-          <div className="homework-stats">
-            <StatCard 
-              title="Progress" 
-              value={`${userStats.completedScenarios.length}/${alertsHomeworkScenarios.length} scenarios`} 
+    <HomeworkLayout
+      user={user}
+      title="Alerts & Prompts - Homework Assignment"
+      description="Complete complex alert scenarios to test your understanding. Each scenario builds on the concepts learned in class."
+      backToClassPath="/class/alerts"
+      backToClassText="← Back to Alerts Class"
+      completedScenarios={completedScenarios.length}
+      totalScenarios={alertsHomeworkScenarios.length}
+      totalPoints={totalPoints}
+      maxPoints={homeworkConfig.maxPoints}
+      passingScore={homeworkConfig.passingScore}
+      isStarted={isStarted}
+      showResults={showResults}
+      onStartHomework={startHomework}
+      onSubmitHomework={submitHomework}
+    >
+      {isStarted && !showResults && (
+        <div className="scenarios-grid">
+          {alertsHomeworkScenarios.map((scenario) => (
+            <AlertHomeworkScenarioCard
+              key={scenario.id}
+              scenario={scenario}
+              isCompleted={completedScenarios.includes(scenario.id)}
+              attempts={0}
+              onStart={startScenario}
+              isDisabled={currentScenario !== null}
             />
-            <StatCard 
-              title="Points" 
-              value={`${userStats.totalPoints}/${homeworkConfig.maxPoints}`} 
-            />
-            <StatCard 
-              title="Status" 
-              value={userStats.totalPoints >= homeworkConfig.passingScore ? 'PASSING' : 'NEEDS WORK'} 
-            />
-          </div>
+          ))}
+        </div>
+      )}
 
-          <div className="homework-controls">
-            {!isStarted && !showResults && (
-              <button className="homework-btn primary" onClick={startHomework}>
-                Start Homework
-              </button>
-            )}
-            {isStarted && !showResults && (
-              <button className="homework-btn success" onClick={submitHomework}>
-                Submit Homework
-              </button>
-            )}
+      {showResults && (
+        <HomeworkResults
+          completedScenarios={completedScenarios.length}
+          totalScenarios={alertsHomeworkScenarios.length}
+          totalPoints={totalPoints}
+          maxPoints={homeworkConfig.maxPoints}
+        />
+      )}
+
+      {!isStarted && !showResults && (
+        <div className="pre-start-info">
+          <h2>Before You Start</h2>
+          <div className="info-cards">
+            <InfoCard 
+              title="Passing Score" 
+              description={`${homeworkConfig.passingScore}% (${(homeworkConfig.maxPoints * homeworkConfig.passingScore / 100)} points)`} 
+            />
+            <InfoCard 
+              title="Retry Policy" 
+              description={homeworkConfig.allowRetry ? 'Unlimited retries allowed' : 'One attempt only'} 
+            />
           </div>
         </div>
-
-        {isStarted && !showResults && (
-          <div className="scenarios-grid">
-            {alertsHomeworkScenarios.map((scenario) => (
-              <AlertHomeworkScenarioCard
-                key={scenario.id}
-                scenario={scenario}
-                isCompleted={userStats.completedScenarios.includes(scenario.id)}
-                attempts={userStats.attempts[scenario.id]}
-                onStart={startScenario}
-                isDisabled={currentScenario !== null}
-              />
-            ))}
-          </div>
-        )}
-
-        {showResults && (
-          <div className="results-section">
-            <h2>Homework Results</h2>
-            <div className="final-score">
-              <h3>Final Score: {userStats.totalPoints}/{homeworkConfig.maxPoints} ({((userStats.totalPoints / homeworkConfig.maxPoints) * 100).toFixed(1)}%)</h3>
-              <p className={`status ${userStats.totalPoints >= homeworkConfig.passingScore ? 'passed' : 'failed'}`}>
-                {userStats.totalPoints >= homeworkConfig.passingScore ? 'PASSED' : 'FAILED'}
-              </p>
-            </div>
-            
-            <div className="scenario-breakdown">
-              <h4>Scenario Breakdown:</h4>
-              {alertsHomeworkScenarios.map(scenario => (
-                <div key={scenario.id} className="result-item">
-                  <span>{scenario.title}</span>
-                  <span>{userStats.completedScenarios.includes(scenario.id) ? `✓ ${scenario.points} pts` : '✗ 0 pts'}</span>
-                </div>
-              ))}
-            </div>
-            
-            <Link to="/class/alerts" className="btn btn-secondary">
-              Back to Alerts Class
-            </Link>
-          </div>
-        )}
-
-        {!isStarted && !showResults && (
-          <div className="pre-start-info">
-            <h2>Before You Start</h2>
-            <div className="info-cards">
-              <InfoCard 
-                title="Passing Score" 
-                description={`${homeworkConfig.passingScore}% (${(homeworkConfig.maxPoints * homeworkConfig.passingScore / 100)} points)`} 
-              />
-              <InfoCard 
-                title="Retry Policy" 
-                description={homeworkConfig.allowRetry ? 'Unlimited retries allowed' : 'One attempt only'} 
-              />
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+      )}
+    </HomeworkLayout>
   );
 };
 
