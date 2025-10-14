@@ -1,23 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Header from '../../components/Header.tsx';
-import NavigationBar from '../../components/NavigationBar.tsx';
+import React, { useState } from 'react';
+import HomeworkLayout from '../../components/homework/HomeworkLayout';
+import HomeworkResults from '../../components/homework/HomeworkResults';
 import CallToAction from '../../components/CallToAction.tsx';
 import HomeworkScenarioCard from '../../components/alert-elements/HomeworkScenarioCard.tsx';
+import { useAuth } from '../../hooks/useAuth';
+import { useHomeworkState } from '../../hooks/useHomeworkState';
 import { callToActionConfigs } from '../../data/callToActionData.ts';
 import { formsHomeworkScenarios } from '../../data/homework/formsHomeworkData.ts';
 
-interface User {
-  email: string;
-  firstName?: string;
-  lastName?: string;
-}
-
 const FormsHomework: React.FC = () => {
-  const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(null);
-  
-  // Checkbox states
+  const { user, isLoading } = useAuth();
+  const {
+    isStarted,
+    showResults,
+    completedScenarios,
+    totalPoints,
+    startHomework,
+    submitHomework
+  } = useHomeworkState({
+    maxPoints: 100,
+    totalScenarios: formsHomeworkScenarios.length
+  });
+
+  // Form states for interactive practice
   const [checkboxes, setCheckboxes] = useState({
     option1: false,
     option2: true,
@@ -25,41 +30,15 @@ const FormsHomework: React.FC = () => {
     disabled: true
   });
   
-  // Radio button state
   const [radioValue, setRadioValue] = useState('medium');
-  const [disabledRadio] = useState('default');
-  
-  // Select dropdown state
   const [selectValue, setSelectValue] = useState('');
-  
-  // Disabled field states
   const [enabledField, setEnabledField] = useState('');
-  const [disabledField] = useState('This field is disabled');
   const [conditionallyDisabled, setConditionallyDisabled] = useState('');
   const [enableConditional, setEnableConditional] = useState(false);
 
-  useEffect(() => {
-    // Check if user is logged in
-    const userData = localStorage.getItem('user');
-    if (!userData) {
-      navigate('/login');
-      return;
-    }
-
-    try {
-      const parsedUser = JSON.parse(userData);
-      setUser(parsedUser);
-    } catch (error) {
-      navigate('/login');
-    }
-  }, [navigate]);
-
-  const handleCheckboxChange = (name: string) => {
-    if (name !== 'disabled') { // Can't change disabled checkbox
-      setCheckboxes(prev => ({
-        ...prev,
-        [name]: !prev[name as keyof typeof prev]
-      }));
+  const handleCheckboxChange = (option: keyof typeof checkboxes) => {
+    if (option !== 'disabled') {
+      setCheckboxes(prev => ({ ...prev, [option]: !prev[option] }));
     }
   };
 
@@ -76,291 +55,261 @@ const FormsHomework: React.FC = () => {
     setEnableConditional(false);
   };
 
-  useEffect(() => {
-    // Check if user is logged in
-    const userData = localStorage.getItem('user');
-    if (!userData) {
-      navigate('/login');
-      return;
-    }
-
-    try {
-      const parsedUser = JSON.parse(userData);
-      setUser(parsedUser);
-    } catch (error) {
-      navigate('/login');
-    }
-  }, [navigate]);
-
-  if (!user) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
+  if (!user) {
+    return <div>Authentication required</div>;
+  }
+
   return (
-    <div className="homework-page">
-      <Header user={user} title="Forms Homework: Advanced Form Elements Testing" />
-      
-      <NavigationBar 
-        buttons={[
-          {
-            text: "← Back to Forms Class",
-            onClick: () => navigate('/class/forms'),
-            testId: "back-to-class"
-          },
-          {
-            text: "← Back to Dashboard",
-            onClick: () => navigate('/dashboard'),
-            testId: "back-to-dashboard"
-          }
-        ]}
-      />
-
-      <div className="homework-content">
-        <div className="challenges-overview">
-          <h2>Your Assignment</h2>
-          <p>Practice testing advanced form elements including checkboxes, radio buttons, dropdowns, and disabled elements. Complete all the testing scenarios below to master form element automation.</p>
-        </div>
-
-        <div className="practice-section">
-          <h2>Interactive Form Elements - Test All Scenarios</h2>
-          
-          {/* Checkbox Section */}
-          <div className="element-group">
-            <h3>Checkboxes</h3>
-            <div className="checkbox-group" data-testid="checkbox-group">
-              <label className="checkbox-label" data-testid="checkbox-1-label">
-                <input
-                  type="checkbox"
-                  checked={checkboxes.option1}
-                  onChange={() => handleCheckboxChange('option1')}
-                  data-testid="checkbox-1"
-                />
-                Option 1 (Initially unchecked)
-              </label>
-              
-              <label className="checkbox-label" data-testid="checkbox-2-label">
-                <input
-                  type="checkbox"
-                  checked={checkboxes.option2}
-                  onChange={() => handleCheckboxChange('option2')}
-                  data-testid="checkbox-2"
-                />
-                Option 2 (Initially checked)
-              </label>
-              
-              <label className="checkbox-label" data-testid="checkbox-3-label">
-                <input
-                  type="checkbox"
-                  checked={checkboxes.option3}
-                  onChange={() => handleCheckboxChange('option3')}
-                  data-testid="checkbox-3"
-                />
-                Option 3 (Initially unchecked)
-              </label>
-              
-              <label className="checkbox-label disabled" data-testid="checkbox-disabled-label">
-                <input
-                  type="checkbox"
-                  checked={checkboxes.disabled}
-                  disabled
-                  data-testid="checkbox-disabled"
-                />
-                Disabled Option (Cannot be changed)
-              </label>
-            </div>
+    <HomeworkLayout
+      user={user}
+      title="Forms Homework: Advanced Form Elements Testing"
+      description="Practice testing advanced form elements including checkboxes, radio buttons, dropdowns, and disabled elements. Complete all the testing scenarios below to master form element automation."
+      backToClassPath="/class/forms"
+      backToClassText="← Back to Forms Class"
+      completedScenarios={completedScenarios.length}
+      totalScenarios={formsHomeworkScenarios.length}
+      totalPoints={totalPoints}
+      maxPoints={100}
+      passingScore={70}
+      isStarted={isStarted}
+      showResults={showResults}
+      onStartHomework={startHomework}
+      onSubmitHomework={submitHomework}
+    >
+      {isStarted && !showResults && (
+        <>
+          <div className="practice-section">
+            <h2>Interactive Form Elements - Test All Scenarios</h2>
             
-            <div className="element-status" data-testid="checkbox-status">
-              <p>Selected options: {Object.entries(checkboxes)
-                .filter(([key, value]) => value && key !== 'disabled')
-                .map(([key]) => key)
-                .join(', ') || 'None'}</p>
-            </div>
-          </div>
-
-          {/* Radio Button Section */}
-          <div className="element-group">
-            <h3>Radio Buttons</h3>
-            <div className="radio-group" data-testid="radio-group">
-              <label className="radio-label" data-testid="radio-small-label">
-                <input
-                  type="radio"
-                  name="size"
-                  value="small"
-                  checked={radioValue === 'small'}
-                  onChange={() => handleRadioChange('small')}
-                  data-testid="radio-small"
-                />
-                Small
-              </label>
+            {/* Checkbox Section */}
+            <div className="element-group">
+              <h3>Checkboxes</h3>
+              <div className="checkbox-group" data-testid="checkbox-group">
+                <label className="checkbox-label" data-testid="checkbox-1-label">
+                  <input
+                    type="checkbox"
+                    checked={checkboxes.option1}
+                    onChange={() => handleCheckboxChange('option1')}
+                    data-testid="checkbox-1"
+                  />
+                  Option 1 (Initially unchecked)
+                </label>
+                
+                <label className="checkbox-label" data-testid="checkbox-2-label">
+                  <input
+                    type="checkbox"
+                    checked={checkboxes.option2}
+                    onChange={() => handleCheckboxChange('option2')}
+                    data-testid="checkbox-2"
+                  />
+                  Option 2 (Initially checked)
+                </label>
+                
+                <label className="checkbox-label" data-testid="checkbox-3-label">
+                  <input
+                    type="checkbox"
+                    checked={checkboxes.option3}
+                    onChange={() => handleCheckboxChange('option3')}
+                    data-testid="checkbox-3"
+                  />
+                  Option 3 (Initially unchecked)
+                </label>
+                
+                <label className="checkbox-label disabled" data-testid="checkbox-disabled-label">
+                  <input
+                    type="checkbox"
+                    checked={checkboxes.disabled}
+                    disabled
+                    data-testid="checkbox-disabled"
+                  />
+                  Disabled Option (Cannot be changed)
+                </label>
+              </div>
               
-              <label className="radio-label" data-testid="radio-medium-label">
-                <input
-                  type="radio"
-                  name="size"
-                  value="medium"
-                  checked={radioValue === 'medium'}
-                  onChange={() => handleRadioChange('medium')}
-                  data-testid="radio-medium"
-                />
-                Medium (Default selected)
-              </label>
-              
-              <label className="radio-label" data-testid="radio-large-label">
-                <input
-                  type="radio"
-                  name="size"
-                  value="large"
-                  checked={radioValue === 'large'}
-                  onChange={() => handleRadioChange('large')}
-                  data-testid="radio-large"
-                />
-                Large
-              </label>
-            </div>
-            
-            <div className="element-status" data-testid="radio-status">
-              <p>Selected size: {radioValue}</p>
+              <div className="element-status" data-testid="checkbox-status">
+                <p>Selected options: {Object.entries(checkboxes)
+                  .filter(([key, value]) => value && key !== 'disabled')
+                  .map(([key]) => key)
+                  .join(', ') || 'None'}</p>
+              </div>
             </div>
 
-            {/* Disabled Radio Group */}
-            <h4>Disabled Radio Group</h4>
-            <div className="radio-group disabled" data-testid="disabled-radio-group">
-              <label className="radio-label disabled">
+            {/* Radio Button Section */}
+            <div className="element-group">
+              <h3>Radio Buttons</h3>
+              <div className="radio-group" data-testid="radio-group">
+                <label className="radio-label" data-testid="radio-small-label">
+                  <input
+                    type="radio"
+                    name="size"
+                    value="small"
+                    checked={radioValue === 'small'}
+                    onChange={() => handleRadioChange('small')}
+                    data-testid="radio-small"
+                  />
+                  Small
+                </label>
+                
+                <label className="radio-label" data-testid="radio-medium-label">
+                  <input
+                    type="radio"
+                    name="size"
+                    value="medium"
+                    checked={radioValue === 'medium'}
+                    onChange={() => handleRadioChange('medium')}
+                    data-testid="radio-medium"
+                  />
+                  Medium (Default selected)
+                </label>
+                
+                <label className="radio-label" data-testid="radio-large-label">
+                  <input
+                    type="radio"
+                    name="size"
+                    value="large"
+                    checked={radioValue === 'large'}
+                    onChange={() => handleRadioChange('large')}
+                    data-testid="radio-large"
+                  />
+                  Large
+                </label>
+              </div>
+              
+              <div className="element-status" data-testid="radio-status">
+                <p>Selected size: {radioValue}</p>
+              </div>
+            </div>
+
+            {/* Select Dropdown Section */}
+            <div className="element-group">
+              <h3>Select Dropdown</h3>
+              <div className="select-group">
+                <label htmlFor="country-select" data-testid="select-label">Choose a country:</label>
+                <select
+                  id="country-select"
+                  value={selectValue}
+                  onChange={(e) => setSelectValue(e.target.value)}
+                  data-testid="country-select"
+                >
+                  <option value="">-- Please choose a country --</option>
+                  <option value="usa">United States</option>
+                  <option value="canada">Canada</option>
+                  <option value="uk">United Kingdom</option>
+                  <option value="germany">Germany</option>
+                  <option value="france">France</option>
+                </select>
+              </div>
+              
+              <div className="element-status" data-testid="select-status">
+                <p>Selected country: {selectValue || 'None'}</p>
+              </div>
+            </div>
+
+            {/* Text Input Section */}
+            <div className="element-group">
+              <h3>Text Inputs</h3>
+              <div className="form-group">
+                <label htmlFor="enabled-input" data-testid="enabled-label">
+                  Enabled Input:
+                </label>
                 <input
-                  type="radio"
-                  name="disabledGroup"
-                  value="option1"
-                  checked={disabledRadio === 'option1'}
+                  type="text"
+                  id="enabled-input"
+                  value={enabledField}
+                  onChange={(e) => setEnabledField(e.target.value)}
+                  placeholder="Type something here"
+                  data-testid="enabled-input"
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="disabled-input" data-testid="disabled-label">
+                  Disabled Input:
+                </label>
+                <input
+                  type="text"
+                  id="disabled-input"
+                  value="This field is disabled"
                   disabled
-                  data-testid="disabled-radio-1"
+                  data-testid="disabled-input"
                 />
-                Disabled Option 1
-              </label>
+              </div>
               
-              <label className="radio-label disabled">
+              <div className="form-group">
+                <div className="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    id="enable-conditional-checkbox"
+                    checked={enableConditional}
+                    onChange={(e) => setEnableConditional(e.target.checked)}
+                    data-testid="enable-conditional-checkbox"
+                  />
+                  <label htmlFor="enable-conditional-checkbox" data-testid="enable-conditional-label">
+                    Enable the field below
+                  </label>
+                </div>
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="conditional-input" data-testid="conditional-label">
+                  Conditionally Disabled Input:
+                </label>
                 <input
-                  type="radio"
-                  name="disabledGroup"
-                  value="default"
-                  checked={disabledRadio === 'default'}
-                  disabled
-                  data-testid="disabled-radio-2"
+                  type="text"
+                  id="conditional-input"
+                  value={conditionallyDisabled}
+                  onChange={(e) => setConditionallyDisabled(e.target.value)}
+                  disabled={!enableConditional}
+                  placeholder={enableConditional ? "Now you can type!" : "Check the box above to enable"}
+                  data-testid="conditional-input"
                 />
-                Disabled Option 2 (Selected)
-              </label>
+              </div>
             </div>
-          </div>
 
-          {/* Select Dropdown Section */}
-          <div className="element-group">
-            <h3>Select Dropdown</h3>
-            <div className="select-group">
-              <label htmlFor="country-select" data-testid="select-label">Choose a country:</label>
-              <select
-                id="country-select"
-                value={selectValue}
-                onChange={(e) => setSelectValue(e.target.value)}
-                data-testid="country-select"
+            <div className="form-actions">
+              <button
+                type="button"
+                onClick={resetAllElements}
+                className="homework-btn secondary"
+                data-testid="reset-button"
               >
-                <option value="" data-testid="select-placeholder">-- Please choose an option --</option>
-                <option value="us" data-testid="select-us">United States</option>
-                <option value="ca" data-testid="select-ca">Canada</option>
-                <option value="uk" data-testid="select-uk">United Kingdom</option>
-                <option value="au" data-testid="select-au">Australia</option>
-                <option value="disabled" disabled data-testid="select-disabled">Disabled Option</option>
-              </select>
-            </div>
-            
-            <div className="element-status" data-testid="select-status">
-              <p>Selected country: {selectValue || 'None selected'}</p>
+                Reset All Elements
+              </button>
             </div>
           </div>
 
-          {/* Disabled Elements Section */}
-          <div className="element-group">
-            <h3>Disabled Elements</h3>
-            
-            <div className="form-group">
-              <label htmlFor="enabled-input" data-testid="enabled-label">Enabled Input:</label>
-              <input
-                type="text"
-                id="enabled-input"
-                value={enabledField}
-                onChange={(e) => setEnabledField(e.target.value)}
-                placeholder="You can type here"
-                data-testid="enabled-input"
-              />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="disabled-input" data-testid="disabled-label">Disabled Input:</label>
-              <input
-                type="text"
-                id="disabled-input"
-                value={disabledField}
-                disabled
-                data-testid="disabled-input"
-              />
-            </div>
-            
-            <div className="form-group">
-              <label className="checkbox-label" data-testid="enable-conditional-label">
-                <input
-                  type="checkbox"
-                  checked={enableConditional}
-                  onChange={(e) => setEnableConditional(e.target.checked)}
-                  data-testid="enable-conditional-checkbox"
+          <div className="testing-scenarios">
+            <h2>Homework Testing Scenarios</h2>
+            <div className="scenarios-grid">
+              {formsHomeworkScenarios.map((scenario, index) => (
+                <HomeworkScenarioCard
+                  key={index}
+                  title={scenario.title}
+                  icon={scenario.icon}
+                  scenarios={scenario.scenarios}
+                  testId={scenario.testId}
                 />
-                Enable the field below
-              </label>
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="conditional-input" data-testid="conditional-label">
-                Conditionally Disabled Input:
-              </label>
-              <input
-                type="text"
-                id="conditional-input"
-                value={conditionallyDisabled}
-                onChange={(e) => setConditionallyDisabled(e.target.value)}
-                disabled={!enableConditional}
-                placeholder={enableConditional ? "Now you can type!" : "Check the box above to enable"}
-                data-testid="conditional-input"
-              />
+              ))}
             </div>
           </div>
+        </>
+      )}
 
-          <div className="form-actions">
-            <button
-              type="button"
-              onClick={resetAllElements}
-              className="btn btn-secondary"
-              data-testid="reset-button"
-            >
-              Reset All Elements
-            </button>
-          </div>
-        </div>
+      {showResults && (
+        <HomeworkResults
+          completedScenarios={completedScenarios.length}
+          totalScenarios={formsHomeworkScenarios.length}
+          totalPoints={totalPoints}
+          maxPoints={100}
+        />
+      )}
 
-        <div className="testing-scenarios">
-          <h2>Homework Testing Scenarios</h2>
-          <div className="scenarios-grid">
-            {formsHomeworkScenarios.map((scenario, index) => (
-              <HomeworkScenarioCard
-                key={index}
-                title={scenario.title}
-                icon={scenario.icon}
-                scenarios={scenario.scenarios}
-                testId={scenario.testId}
-              />
-            ))}
-          </div>
-        </div>
-
-        <CallToAction {...callToActionConfigs.formsComplete} />
-      </div>
-    </div>
+      <CallToAction {...callToActionConfigs.formsComplete} />
+    </HomeworkLayout>
   );
 };
 

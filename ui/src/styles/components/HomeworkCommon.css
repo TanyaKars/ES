@@ -85,3 +85,25 @@
   transform: translateY(-2px);
   box-shadow: var(--shadow-button-green);
 }
+
+/* Results Section */
+.results-section {
+  background-color: var(--background-light, #f8f9fa);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card, 0 2px 8px rgba(0,0,0,0.1));
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.results-section h2 {
+  color: var(--primary-green, #28a745);
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.results-section p {
+  color: var(--text-color, #495057);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
