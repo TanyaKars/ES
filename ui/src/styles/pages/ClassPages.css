@@ -1,0 +1,135 @@
+/* Class Pages Styles */
+.class-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.class-header {
+  background-color: var(--background-white);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.class-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+.lesson-section {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.practice-section {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.test-credentials {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #e7f3ff;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+}
+
+.testing-scenarios {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.scenario-card {
+  background-color: var(--background-light);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid #e9ecef;
+}
+
+.scenario-card h4 {
+  margin-bottom: 1rem;
+  color: #495057;
+}
+
+.scenario-card ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.scenario-card li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.scenario-card li::before {
+  content: "•";
+  color: #007bff;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.homework-section {
+  background-color: #007bff;
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.homework-section .btn {
+  margin-top: 1rem;
+}
+
+/* Class intro section */
+.class-intro {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.class-intro h2 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.class-intro p {
+  color: #666;
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}

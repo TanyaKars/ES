@@ -1,0 +1,262 @@
+/* Homework Pages Styles */
+.homework-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.homework-header {
+  background-color: #fff;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-indicator {
+  background-color: #e7f3ff;
+  color: #007bff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.homework-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.challenges-overview {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.challenge-card {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.challenge-card:hover {
+  border-color: #007bff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,123,255,0.15);
+}
+
+.challenge-card.active {
+  border-color: #007bff;
+  background-color: #e7f3ff;
+}
+
+.challenge-card.completed {
+  border-color: #28a745;
+  background-color: #e7f5e7;
+}
+
+.completed-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #28a745;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.challenge-section {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.requirements {
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.requirements h4 {
+  margin-bottom: 1rem;
+  color: #856404;
+}
+
+.requirements ul {
+  color: #856404;
+}
+
+.challenge-form {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  margin-top: 1.5rem;
+}
+
+.dynamic-fields {
+  margin-bottom: 2rem;
+}
+
+.dynamic-field-group {
+  margin-bottom: 1rem;
+}
+
+.field-with-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.field-with-controls input {
+  flex: 1;
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.step {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e9ecef;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.step.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.step-content {
+  margin: 2rem 0;
+}
+
+.completion-section {
+  background-color: #28a745;
+  color: white;
+  padding: 3rem;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.completion-section h2 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+}
+
+.completion-section .btn {
+  margin-top: 2rem;
+  background-color: white;
+  color: #28a745;
+  border: 2px solid white;
+}
+
+.completion-section .btn:hover {
+  background-color: #f8f9fa;
+}
+
+/* Call to Action Section - Unified component for homework and completion */
+.call-to-action-section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.call-to-action-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Default styling (homework style) */
+.call-to-action-section h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.call-to-action-section p {
+  color: #7f8c8d;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.call-to-action-section .btn {
+  margin-top: 1rem;
+}
+
+/* Completion variant (when icon is present) */
+.call-to-action-section:has(h2:first-child:contains("🎯")), 
+.call-to-action-section[data-testid="completion-section"] {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fff9 100%);
+  border-color: #27ae60;
+  border-width: 2px;
+  padding: 3rem;
+}
+
+.call-to-action-section:has(h2:first-child:contains("🎯")) h2,
+.call-to-action-section[data-testid="completion-section"] h2 {
+  color: #27ae60;
+  font-size: 2.5rem;
+}
+
+.call-to-action-section:has(h2:first-child:contains("🎯")) p,
+.call-to-action-section[data-testid="completion-section"] p {
+  color: #2c3e50;
+}
+
+.call-to-action-section:has(h2:first-child:contains("🎯")) .btn,
+.call-to-action-section[data-testid="completion-section"] .btn {
+  background-color: #27ae60;
+  color: white;
+  border: 2px solid #27ae60;
+  margin-top: 2rem;
+}
+
+.call-to-action-section:has(h2:first-child:contains("🎯")) .btn:hover,
+.call-to-action-section[data-testid="completion-section"] .btn:hover {
+  background-color: #229954;
+  border-color: #229954;
+}
