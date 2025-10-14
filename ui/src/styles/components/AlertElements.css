@@ -3,72 +3,16 @@
   margin-bottom: 2rem;
 }
 
-.alerts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
+/* Use cards-grid medium from CardComponents.css instead of .alerts-grid */
 
-.alert-card {
-  background-color: #fff;
-  padding: 2rem;
-  padding-bottom: 80px; /* Extra space for the button */
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  text-align: center;
-  border: 2px solid #e9ecef;
-  transition: all 0.2s ease;
-  position: relative;
-  min-height: 320px; /* Ensure consistent card height */
-}
-
-.alert-card:hover {
-  border-color: #007bff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,123,255,0.15);
-}
-
-.alert-card-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.alert-icon {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-}
-
-.alert-card h3 {
-  margin: 0;
-  color: #495057;
-  font-size: 1.5rem;
-}
-
-.alert-description {
-  color: #666;
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.alert-button-container {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 4rem); /* Account for card padding */
-}
-
-.alert-button-container .btn {
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  min-width: 120px;
-  width: 100%;
-}
+/* Alert cards now use unified card system:
+   - .card-base.card-large.card-centered for structure
+   - .card-header for header area
+   - .card-icon for icons  
+   - .card-title for titles
+   - .card-description for descriptions
+   - .card-button-container for button positioning
+*/
 
 /* Prompt Result Display */
 .prompt-result-section {
@@ -291,62 +235,18 @@
   100% { opacity: 1; }
 }
 
-.scenarios-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 25px;
-}
+/* Scenario cards now use unified card system:
+   - .cards-grid.large for grid layout
+   - .card-base.card-extra-large for structure
+   - .card-completed modifier for completed state
+*/
 
-.scenario-card {
-  background: var(--background-white);
-  border-radius: var(--radius-md);
-  padding: 25px;
-  padding-bottom: 60px; /* Extra space for the button */
-  box-shadow: var(--shadow-base);
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  position: relative;
-  min-height: 280px; /* Ensure consistent card height */
-}
-
-.scenario-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-}
-
-.scenario-card.completed {
-  border-color: #27ae60;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fff9 100%);
-}
-
-.scenario-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.scenario-header h3 {
-  color: #2c3e50;
-  margin: 0;
-  font-size: 1.3rem;
-}
-
-.difficulty-badge {
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.scenario-description {
-  color: #7f8c8d;
-  margin-bottom: 20px;
-  font-size: 1rem;
-  line-height: 1.5;
-}
+/* Scenario header and content now use unified card system:
+   - .card-header.horizontal for header layout
+   - .card-title for scenario titles
+   - .card-badge with difficulty classes (easy/medium/hard)
+   - .card-description for scenario descriptions
+*/
 
 .scenario-instructions {
   margin-bottom: 20px;
@@ -368,31 +268,24 @@
   line-height: 1.4;
 }
 
-.scenario-footer {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 20px;
-  padding-top: 20px;
-  padding-right: 120px; /* Space for the button */
-  border-top: 1px solid #ecf0f1;
-}
+/* Scenario footer and button now use unified card system:
+   - .card-footer.left for footer layout
+   - .card-button-container.right for start button positioning
+*/
 
 .start-scenario-btn {
   background: linear-gradient(45deg, #3498db, #2980b9);
   color: white;
   border: none;
-  padding: 10px 20px;
   border-radius: 6px;
-  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
+  padding: 12px 24px !important;
+  font-size: 1rem !important;
+  min-width: 100px;
 }
 
 .start-scenario-btn:hover {
@@ -465,42 +358,12 @@
   font-size: 2rem;
 }
 
-.pre-start-info .info-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-.pre-start-info .info-card {
-  background: var(--background-light, #f8f9fa) !important;
-  border-radius: var(--radius-sm, 8px) !important;
-  padding: 1.5rem !important;
-  border: 1px solid #e9ecef !important;
-  transition: all 0.2s ease !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
-  min-height: 80px !important;
-  display: block !important;
-}
-
-.pre-start-info .info-card:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
-}
-
-.pre-start-info .info-card h3 {
-  color: var(--text-primary, #2c3e50) !important;
-  margin-bottom: 0.75rem !important;
-  font-size: 1.2rem !important;
-  font-weight: 600 !important;
-}
-
-.pre-start-info .info-card p {
-  color: var(--text-secondary, #7f8c8d) !important;
-  margin: 0 !important;
-  font-size: 1rem !important;
-  line-height: 1.4 !important;
-}
+/* Info cards now use unified card system:
+   - .cards-grid.small for grid layout
+   - .card-base.card-small.card-info.card-centered for structure
+   - .card-header and .card-title for titles
+   - .card-content and .card-description for content
+*/
 
 /* Responsive adjustments for alerts */
 @media (max-width: 768px) {
@@ -518,42 +381,5 @@
     margin-left: 0;
   }
   
-  .scenarios-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .scenario-card {
-    min-height: 240px;
-    padding-bottom: 55px;
-  }
-  
-  .scenario-footer {
-    padding-right: 100px;
-  }
-  
-  .start-scenario-btn {
-    bottom: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 0.8rem;
-  }
-  
-  .alert-card {
-    min-height: 280px;
-    padding-bottom: 70px;
-  }
-  
-  .alert-button-container {
-    bottom: 15px;
-    width: calc(100% - 3rem);
-  }
-  
-  .alert-button-container .btn {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-  }
-  
-  .info-cards {
-    grid-template-columns: 1fr;
-  }
+  /* Mobile responsive adjustments now handled by CardComponents.css */
 }

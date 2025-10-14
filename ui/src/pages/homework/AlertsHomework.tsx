@@ -314,7 +314,7 @@ const AlertsHomework: React.FC = () => {
       onSubmitHomework={submitHomework}
     >
       {isStarted && !showResults && (
-        <div className="scenarios-grid">
+        <div className="cards-grid large">
           {alertsHomeworkScenarios.map((scenario) => (
             <AlertHomeworkScenarioCard
               key={scenario.id}
@@ -340,7 +340,7 @@ const AlertsHomework: React.FC = () => {
       {!isStarted && !showResults && (
         <div className="pre-start-info">
           <h2>Before You Start</h2>
-          <div className="info-cards">
+          <div className="cards-grid small">
             <InfoCard 
               title="Passing Score" 
               description={`${homeworkConfig.passingScore}% (${(homeworkConfig.maxPoints * homeworkConfig.passingScore / 100)} points)`} 

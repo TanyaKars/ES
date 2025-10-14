@@ -39,13 +39,13 @@ const AlertCard: React.FC<AlertCardProps> = ({ config, onResult }) => {
   };
 
   return (
-    <div className="alert-card" data-testid={`${config.type}-card`}>
-      <div className="alert-card-header">
-        <span className="alert-icon">{getCardIcon(config.type)}</span>
-        <h3>{config.title}</h3>
+    <div className="card-base card-large card-centered" data-testid={`${config.type}-card`}>
+      <div className="card-header">
+        <span className="card-icon">{getCardIcon(config.type)}</span>
+        <h3 className="card-title">{config.title}</h3>
       </div>
-      <p className="alert-description">{getDescription(config.type)}</p>
-      <div className="alert-button-container">
+      <p className="card-description">{getDescription(config.type)}</p>
+      <div className="card-button-container">
         <AlertButton config={config} onResult={onResult} />
       </div>
     </div>

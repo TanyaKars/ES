@@ -284,7 +284,7 @@ const FormsHomework: React.FC = () => {
 
           <div className="testing-scenarios">
             <h2>Homework Testing Scenarios</h2>
-            <div className="scenarios-grid">
+            <div className="cards-grid large">
               {formsHomeworkScenarios.map((scenario, index) => (
                 <HomeworkScenarioCard
                   key={index}

@@ -97,25 +97,31 @@ const Dashboard: React.FC = () => {
             <p>Start your QA automation journey with our comprehensive courses.</p>
           </div>
 
-          <div className="courses-grid">
+          <div className="cards-grid medium">
             {courses.map((course) => (
-              <div key={course.id} className="course-card" data-testid={course.testId}>
-                <div className="course-icon">{course.icon}</div>
-                <h3>Class {course.classNumber}: {course.title}</h3>
-                <p>{course.description}</p>
-                <div className="course-progress">
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: `${course.progress}%` }}></div>
-                  </div>
-                  <span>{course.progress}% Complete</span>
+              <div key={course.id} className="card-base card-large card-centered" data-testid={course.testId}>
+                <div className="card-header">
+                  <span className="card-icon">{course.icon}</span>
+                  <h3 className="card-title">Class {course.classNumber}: {course.title}</h3>
                 </div>
-                <button 
-                  className="btn btn-primary" 
-                  onClick={() => navigate(course.route)}
-                  data-testid={`start-${course.id}-class`}
-                >
-                  Start Class
-                </button>
+                <div className="card-content">
+                  <p className="card-description">{course.description}</p>
+                  <div className="card-progress">
+                    <div className="card-progress-bar">
+                      <div className="card-progress-fill" style={{ width: `${course.progress}%` }}></div>
+                    </div>
+                    <div className="card-progress-text">{course.progress}% Complete</div>
+                  </div>
+                </div>
+                <div className="card-button-container">
+                  <button 
+                    className="btn btn-primary" 
+                    onClick={() => navigate(course.route)}
+                    data-testid={`start-${course.id}-class`}
+                  >
+                    Start Class
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -124,29 +130,47 @@ const Dashboard: React.FC = () => {
             <h2>Practice Arena</h2>
             <p>Test your skills on real applications with various scenarios</p>
             
-            <div className="practice-grid">
-              <div className="practice-card" data-testid="login-practice">
-                <h4>Login/Authentication</h4>
-                <p>Practice testing login flows, validation, and security</p>
-                <button className="btn btn-outline" data-testid="practice-login">
-                  Practice Now
-                </button>
+            <div className="cards-grid small">
+              <div className="card-base card-small" data-testid="login-practice">
+                <div className="card-header">
+                  <h4 className="card-title">Login/Authentication</h4>
+                </div>
+                <div className="card-content">
+                  <p className="card-description">Practice testing login flows, validation, and security</p>
+                </div>
+                <div className="card-button-container small">
+                  <button className="btn btn-outline" data-testid="practice-login">
+                    Practice Now
+                  </button>
+                </div>
               </div>
 
-              <div className="practice-card" data-testid="forms-practice">
-                <h4>Form Validation</h4>
-                <p>Test complex forms with various validation rules</p>
-                <button className="btn btn-outline" data-testid="practice-forms">
-                  Practice Now
-                </button>
+              <div className="card-base card-small" data-testid="forms-practice">
+                <div className="card-header">
+                  <h4 className="card-title">Form Validation</h4>
+                </div>
+                <div className="card-content">
+                  <p className="card-description">Test complex forms with various validation rules</p>
+                </div>
+                <div className="card-button-container small">
+                  <button className="btn btn-outline" data-testid="practice-forms">
+                    Practice Now
+                  </button>
+                </div>
               </div>
 
-              <div className="practice-card" data-testid="api-practice">
-                <h4>API Endpoints</h4>
-                <p>Test REST APIs with different methods and responses</p>
-                <button className="btn btn-outline" data-testid="practice-api">
-                  Practice Now
-                </button>
+              <div className="card-base card-small" data-testid="api-practice">
+                <div className="card-header">
+                  <h4 className="card-title">API Endpoints</h4>
+                </div>
+                <div className="card-content">
+                  <p className="card-description">Test REST APIs with different methods and responses</p>
+                </div>
+                <div className="card-button-container small">
+                  <button className="btn btn-outline" data-testid="practice-api">
+                    Practice Now
+                  </button>
+                </div>
               </div>
             </div>
           </div>

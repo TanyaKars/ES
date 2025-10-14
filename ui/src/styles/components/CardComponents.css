@@ -1,0 +1,413 @@
+/* Universal Card Components 
+ * 
+ * MIGRATION GUIDE - Replace old card classes with unified system:
+ * 
+ * OLD CLASSES              -> NEW UNIFIED CLASSES
+ * ================================================================
+ * .alerts-grid             -> .cards-grid.medium
+ * .alert-card              -> .card-base.card-large.card-centered
+ * .alert-card-header       -> .card-header  
+ * .alert-icon              -> .card-icon
+ * .alert-card h3           -> .card-title
+ * .alert-description       -> .card-description
+ * .alert-button-container  -> .card-button-container
+ * 
+ * .scenarios-grid          -> .cards-grid.large
+ * .scenario-card           -> .card-base.card-extra-large
+ * .scenario-card.completed -> .card-base.card-extra-large.card-completed
+ * .scenario-header         -> .card-header.horizontal
+ * .scenario-header h3      -> .card-title
+ * .difficulty-badge        -> .card-badge.easy/.medium/.hard
+ * .scenario-description    -> .card-description
+ * .scenario-footer         -> .card-footer.left
+ * .start-scenario-btn      -> .card-button-container.right + custom btn styling
+ * 
+ * .courses-grid            -> .cards-grid.medium
+ * .course-card             -> .card-base.card-large.card-centered
+ * .course-icon             -> .card-icon
+ * .course-card h3          -> .card-title
+ * .course-card p           -> .card-description
+ * .course-progress         -> .card-progress
+ * .progress-bar            -> .card-progress-bar
+ * .progress-fill           -> .card-progress-fill
+ * 
+ * .practice-grid           -> .cards-grid.small
+ * .practice-card           -> .card-base.card-small
+ * .practice-card h4        -> .card-title
+ * .practice-card p         -> .card-description
+ * 
+ * USAGE EXAMPLES:
+ * ===============
+ * <!-- Alert Card -->
+ * <div class="card-base card-large card-centered">
+ *   <div class="card-header">
+ *     <span class="card-icon">🚨</span>
+ *     <h3 class="card-title">Alert</h3>
+ *   </div>
+ *   <p class="card-description">Description text</p>
+ *   <div class="card-button-container">
+ *     <button class="btn">Action</button>
+ *   </div>
+ * </div>
+ * 
+ * <!-- Scenario Card -->
+ * <div class="card-base card-extra-large card-completed">
+ *   <div class="card-header horizontal">
+ *     <h3 class="card-title">Scenario Title</h3>
+ *     <span class="card-badge easy">Easy</span>
+ *   </div>
+ *   <p class="card-description">Description</p>
+ *   <div class="card-footer left">
+ *     <span>Points: 10</span>
+ *   </div>
+ *   <div class="card-button-container right">
+ *     <button class="btn start-scenario-btn">Start</button>
+ *   </div>
+ * </div>
+ */
+
+/* Base card structure - shared by all card types */
+.card-base {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+  border: 2px solid #e9ecef;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-base:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Card sizing variants */
+.card-small {
+  min-height: 180px;
+  padding: 1.5rem;
+  padding-bottom: 60px;
+}
+
+.card-medium {
+  min-height: 280px;
+  padding: 2rem;
+  padding-bottom: 70px;
+}
+
+.card-large {
+  min-height: 320px;
+  padding: 2rem;
+  padding-bottom: 80px;
+}
+
+.card-extra-large {
+  min-height: 400px;
+  padding: 25px;
+  padding-bottom: 90px;
+}
+
+/* Card content areas */
+.card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.card-header.horizontal {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-title {
+  margin: 0;
+  color: #495057;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.card-subtitle {
+  color: #6c757d;
+  font-size: 1rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.card-description {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Badge/Status indicators */
+.card-badge {
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.card-badge.easy { background-color: #4CAF50; }
+.card-badge.medium { background-color: #FF9800; }
+.card-badge.hard { background-color: #F44336; }
+.card-badge.completed { background-color: #28a745; }
+.card-badge.in-progress { background-color: #f39c12; }
+.card-badge.not-started { background-color: #95a5a6; }
+
+/* Card footer area */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #ecf0f1;
+  min-height: 40px;
+}
+
+.card-footer.center {
+  justify-content: center;
+}
+
+.card-footer.left {
+  justify-content: flex-start;
+}
+
+/* Button positioning within cards */
+.card-button-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 4rem);
+}
+
+.card-button-container.small {
+  bottom: 15px;
+  width: calc(100% - 3rem);
+}
+
+.card-button-container.right {
+  left: auto;
+  right: 15px;
+  transform: none;
+  width: auto;
+}
+
+.card-button-container .btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  min-width: 120px;
+}
+
+.card-button-container.small .btn {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+}
+
+.card-button-container.right .btn {
+  width: auto;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+}
+
+/* Card state modifiers */
+.card-completed {
+  border-color: #27ae60;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fff9 100%);
+}
+
+.card-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.card-selected {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+}
+
+/* Progress indicators */
+.card-progress {
+  margin: 1rem 0;
+}
+
+.card-progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.card-progress-fill {
+  height: 100%;
+  background-color: #28a745;
+  transition: width 0.3s ease;
+}
+
+.card-progress-text {
+  font-size: 0.9rem;
+  color: #6c757d;
+  text-align: center;
+}
+
+/* Card grid layouts */
+.cards-grid {
+  display: grid;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cards-grid.small {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.cards-grid.medium {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.cards-grid.large {
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cards-grid,
+  .cards-grid.small,
+  .cards-grid.medium,
+  .cards-grid.large {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .card-small {
+    min-height: 160px;
+    padding: 1.25rem;
+    padding-bottom: 55px;
+  }
+  
+  .card-medium {
+    min-height: 240px;
+    padding: 1.5rem;
+    padding-bottom: 65px;
+  }
+  
+  .card-large {
+    min-height: 280px;
+    padding: 1.5rem;
+    padding-bottom: 70px;
+  }
+  
+  .card-extra-large {
+    min-height: 320px;
+    padding: 1.5rem;
+    padding-bottom: 75px;
+  }
+  
+  .card-button-container {
+    bottom: 15px;
+    width: calc(100% - 3rem);
+  }
+  
+  .card-button-container.small {
+    bottom: 10px;
+    width: calc(100% - 2.5rem);
+  }
+  
+  .card-button-container.right {
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .card-button-container .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .card-button-container.small .btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .card-button-container.right .btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+  
+  .card-header.horizontal {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .card-icon {
+    font-size: 2.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.3rem;
+  }
+}
+
+/* Utility classes for specific card types */
+.card-centered { text-align: center; }
+.card-left { text-align: left; }
+.card-right { text-align: right; }
+
+/* Animation utilities */
+.card-pulse {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* Special card variants */
+.card-info {
+  background: var(--background-light, #f8f9fa);
+  border: 1px solid #e9ecef;
+}
+
+.card-warning {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+}
+
+.card-success {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.card-danger {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+}

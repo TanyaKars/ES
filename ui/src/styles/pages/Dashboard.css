@@ -67,70 +67,22 @@
   font-size: 1.1rem;
 }
 
-.courses-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
+/* Course cards now use unified card system:
+   - .cards-grid.medium for grid layout
+   - .card-base.card-large.card-centered for structure
+   - .card-icon for course icons
+   - .card-title for course titles
+   - .card-description for course descriptions
+   - .card-button-container for button positioning
+*/
 
-.course-card {
-  background-color: var(--background-white);
-  padding: var(--spacing-lg);
-  padding-bottom: 80px; /* Extra space for the button */
-  border-radius: var(--radius-md);
-  border: 1px solid #e9ecef;
-  transition: transform 0.2s ease;
-  position: relative;
-  min-height: 300px; /* Ensure consistent card height */
-}
-
-.course-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
-}
-
-.course-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.course-card h3 {
-  color: #333;
-  margin-bottom: 0.5rem;
-}
-
-.course-card p {
-  color: #666;
-  margin-bottom: 1.5rem;
-}
-
-.course-progress {
-  margin-bottom: 1.5rem;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 8px;
-  background-color: #e9ecef;
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
-}
-
-.progress-fill {
-  height: 100%;
-  background-color: #28a745;
-  transition: width 0.3s ease;
-}
-
-.course-card .btn {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 4rem); /* Account for card padding */
-}
+/* Course progress now uses unified card system:
+   - .card-progress for progress container
+   - .card-progress-bar for progress bar
+   - .card-progress-fill for progress fill
+   - .card-progress-text for progress text
+   - .card-button-container for button positioning
+*/
 
 .practice-section {
   background-color: var(--background-white);
@@ -148,44 +100,13 @@
   margin-bottom: 2rem;
 }
 
-.practice-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.practice-card {
-  padding: 1.5rem;
-  padding-bottom: 70px; /* Extra space for the button */
-  border: 2px solid #e9ecef;
-  border-radius: 8px;
-  transition: border-color 0.2s ease;
-  position: relative;
-  min-height: 180px; /* Ensure consistent card height */
-}
-
-.practice-card:hover {
-  border-color: #007bff;
-}
-
-.practice-card h4 {
-  color: #333;
-  margin-bottom: 0.5rem;
-}
-
-.practice-card p {
-  color: #666;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-}
-
-.practice-card .btn {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 3rem); /* Account for card padding */
-}
+/* Practice cards now use unified card system:
+   - .cards-grid.small for grid layout  
+   - .card-base.card-small for structure
+   - .card-title for practice titles
+   - .card-description for practice descriptions
+   - .card-button-container.small for button positioning
+*/
 
 /* Responsive Design for Dashboard */
 @media (max-width: 768px) {
@@ -199,27 +120,5 @@
     flex-direction: column;
   }
   
-  .course-card {
-    min-height: 260px;
-    padding-bottom: 70px;
-  }
-  
-  .course-card .btn {
-    bottom: 15px;
-    width: calc(100% - 3rem);
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-  }
-  
-  .practice-card {
-    min-height: 160px;
-    padding-bottom: 60px;
-  }
-  
-  .practice-card .btn {
-    bottom: 10px;
-    width: calc(100% - 2.5rem);
-    padding: 0.7rem 1.2rem;
-    font-size: 0.9rem;
-  }
+  /* Mobile responsive adjustments now handled by CardComponents.css */
 }

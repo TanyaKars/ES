@@ -18,13 +18,17 @@ interface ScenarioCardProps {
 
 const ScenarioCard: React.FC<ScenarioCardProps> = ({ scenario }) => {
   return (
-    <div className="scenario-card" data-testid={scenario.testId}>
-      <h4>{scenario.icon} {scenario.title}</h4>
-      <ul>
-        {scenario.items.map((item, index) => (
-          <li key={index}>{item.text}</li>
-        ))}
-      </ul>
+    <div className="card-base card-medium" data-testid={scenario.testId}>
+      <div className="card-header">
+        <h4 className="card-title">{scenario.icon} {scenario.title}</h4>
+      </div>
+      <div className="card-content">
+        <ul>
+          {scenario.items.map((item, index) => (
+            <li key={index}>{item.text}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

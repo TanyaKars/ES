@@ -1,6 +1,7 @@
 /* Main App CSS - Modularized Styles */
 /* Import base styles and components */
 @import './styles/base.css';
+@import './styles/components/CardComponents.css';
 @import './styles/components/HomeworkCommon.css';
 @import './styles/components/FormElements.css';
 @import './styles/components/AlertElements.css';

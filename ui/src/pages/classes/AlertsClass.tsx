@@ -97,7 +97,7 @@ const AlertsClass: React.FC = () => {
           </p>
         </div>
 
-        <div className="alerts-grid">
+        <div className="cards-grid medium">
           {alertButtons.map((buttonConfig) => (
             <AlertCard
               key={buttonConfig.id}

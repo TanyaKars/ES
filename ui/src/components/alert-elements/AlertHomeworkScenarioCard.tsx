@@ -16,40 +16,42 @@ const AlertHomeworkScenarioCard: React.FC<AlertHomeworkScenarioCardProps> = ({
   onStart,
   isDisabled
 }) => {
-  const getDifficultyColor = (difficulty: string): string => {
-    switch (difficulty) {
-      case 'Easy': return '#4CAF50';
-      case 'Medium': return '#FF9800';
-      case 'Hard': return '#F44336';
-      default: return '#757575';
-    }
-  };
+
 
   return (
-    <div className={`scenario-card ${isCompleted ? 'completed' : ''}`}>
-      <div className="scenario-header">
-        <h3>{scenario.title}</h3>
+    <div className={`card-base card-extra-large ${isCompleted ? 'card-completed' : ''}`}>
+      <div className="card-header horizontal">
+        <h3 className="card-title">{scenario.title}</h3>
         <span 
-          className="difficulty-badge"
-          style={{ backgroundColor: getDifficultyColor(scenario.difficulty) }}
+          className={`card-badge ${scenario.difficulty.toLowerCase()}`}
         >
           {scenario.difficulty}
         </span>
       </div>
       
-      <p className="scenario-description">{scenario.description}</p>
-      
-      <div className="scenario-instructions">
-        <h4>Instructions:</h4>
-        <ol>
-          {scenario.instructions.map((instruction, index) => (
-            <li key={index}>{instruction}</li>
-          ))}
-        </ol>
+      <div className="card-content">
+        <p className="card-description">{scenario.description}</p>
+        
+        <div className="scenario-instructions">
+          <h4>Instructions:</h4>
+          <ol>
+            {scenario.instructions.map((instruction, index) => (
+              <li key={index}>{instruction}</li>
+            ))}
+          </ol>
+        </div>
       </div>
       
-      <div className="scenario-footer">
+      <div className="card-footer left">
         <span className="points">Points: {scenario.points}</span>
+        {attempts && (
+          <div className="attempts">
+            Attempts: {attempts}
+          </div>
+        )}
+      </div>
+      
+      <div className="card-button-container right">
         <button 
           className="start-scenario-btn"
           onClick={() => onStart(scenario.id)}
@@ -58,12 +60,6 @@ const AlertHomeworkScenarioCard: React.FC<AlertHomeworkScenarioCardProps> = ({
           {isCompleted ? 'Retry' : 'Start'}
         </button>
       </div>
-      
-      {attempts && (
-        <div className="attempts">
-          Attempts: {attempts}
-        </div>
-      )}
     </div>
   );
 };

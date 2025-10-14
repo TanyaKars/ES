@@ -16,13 +16,17 @@ const HomeworkScenarioCard: React.FC<HomeworkScenarioCardProps> = ({
   className = '' 
 }) => {
   return (
-    <div className={`scenario-card ${className}`} data-testid={testId}>
-      <h4>{icon} {title}</h4>
-      <ul>
-        {scenarios.map((scenario, index) => (
-          <li key={index}>{scenario}</li>
-        ))}
-      </ul>
+    <div className={`card-base card-medium ${className}`} data-testid={testId}>
+      <div className="card-header">
+        <h4 className="card-title">{icon} {title}</h4>
+      </div>
+      <div className="card-content">
+        <ul>
+          {scenarios.map((scenario, index) => (
+            <li key={index}>{scenario}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
