@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header.tsx';
 import NavigationBar from '../../components/NavigationBar.tsx';
 import CallToAction from '../../components/CallToAction.tsx';
+import HomeworkScenarioCard from '../../components/alert-elements/HomeworkScenarioCard.tsx';
 import { callToActionConfigs } from '../../data/callToActionData.ts';
+import { formsHomeworkScenarios } from '../../data/homework/formsHomeworkData.ts';
 
 interface User {
   email: string;
@@ -344,71 +346,15 @@ const FormsHomework: React.FC = () => {
         <div className="testing-scenarios">
           <h2>Homework Testing Scenarios</h2>
           <div className="scenarios-grid">
-            <div className="scenario-card" data-testid="checkbox-scenario">
-              <h4>☑️ Checkbox Testing</h4>
-              <ul>
-                <li>Test individual checkbox toggle</li>
-                <li>Verify disabled checkboxes cannot be changed</li>
-                <li>Test multiple checkbox selections</li>
-                <li>Verify checkbox state persistence</li>
-                <li>Test checkbox accessibility (labels, focus)</li>
-              </ul>
-            </div>
-
-            <div className="scenario-card" data-testid="radio-scenario">
-              <h4>📻 Radio Button Testing</h4>
-              <ul>
-                <li>Test radio button group exclusivity</li>
-                <li>Verify default selection</li>
-                <li>Test disabled radio groups</li>
-                <li>Verify only one selection per group</li>
-                <li>Test radio button keyboard navigation</li>
-              </ul>
-            </div>
-
-            <div className="scenario-card" data-testid="select-scenario">
-              <h4>📋 Dropdown Testing</h4>
-              <ul>
-                <li>Test dropdown option selection</li>
-                <li>Verify disabled options are not selectable</li>
-                <li>Test default/placeholder behavior</li>
-                <li>Test keyboard navigation</li>
-                <li>Verify dropdown value persistence</li>
-              </ul>
-            </div>
-
-            <div className="scenario-card" data-testid="disabled-scenario">
-              <h4>🚫 Disabled Elements</h4>
-              <ul>
-                <li>Verify disabled elements are not interactive</li>
-                <li>Test conditional enable/disable logic</li>
-                <li>Verify disabled styling is applied</li>
-                <li>Test accessibility for disabled elements</li>
-                <li>Test form submission with disabled fields</li>
-              </ul>
-            </div>
-
-            <div className="scenario-card" data-testid="edge-case-scenario">
-              <h4>🧪 Edge Cases</h4>
-              <ul>
-                <li>Test rapid clicking on elements</li>
-                <li>Test form state after page refresh</li>
-                <li>Test elements with JavaScript disabled</li>
-                <li>Test form validation with disabled elements</li>
-                <li>Test browser autofill behavior</li>
-              </ul>
-            </div>
-
-            <div className="scenario-card" data-testid="automation-scenario">
-              <h4>🤖 Automation Challenges</h4>
-              <ul>
-                <li>Create test scripts for all element types</li>
-                <li>Implement wait strategies for dynamic elements</li>
-                <li>Test element visibility and interaction</li>
-                <li>Handle element state changes</li>
-                <li>Verify element attributes and properties</li>
-              </ul>
-            </div>
+            {formsHomeworkScenarios.map((scenario, index) => (
+              <HomeworkScenarioCard
+                key={index}
+                title={scenario.title}
+                icon={scenario.icon}
+                scenarios={scenario.scenarios}
+                testId={scenario.testId}
+              />
+            ))}
           </div>
         </div>
 
