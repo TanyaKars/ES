@@ -27,6 +27,7 @@ interface HomeworkLayoutProps {
   showResults: boolean;
   onStartHomework: () => void;
   onSubmitHomework: () => void;
+  onTryAgain: () => void;
   // Content
   children: React.ReactNode;
 }
@@ -46,6 +47,7 @@ const HomeworkLayout: React.FC<HomeworkLayoutProps> = ({
   showResults,
   onStartHomework,
   onSubmitHomework,
+  onTryAgain,
   children
 }) => {
   const navigate = useNavigate();
@@ -98,6 +100,15 @@ const HomeworkLayout: React.FC<HomeworkLayoutProps> = ({
             {isStarted && !showResults && (
               <button className="homework-btn success" onClick={onSubmitHomework}>
                 Submit Homework
+              </button>
+            )}
+            {showResults && (
+              <button 
+                className="homework-btn primary" 
+                onClick={onTryAgain}
+                data-testid="try-again-btn"
+              >
+                Try Again
               </button>
             )}
           </div>

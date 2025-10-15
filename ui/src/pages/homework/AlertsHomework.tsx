@@ -16,7 +16,8 @@ const AlertsHomework: React.FC = () => {
     totalPoints,
     startHomework,
     submitHomework,
-    completeScenario
+    completeScenario,
+    resetHomework
   } = useHomeworkState({
     maxPoints: homeworkConfig.maxPoints,
     totalScenarios: alertsHomeworkScenarios.length
@@ -312,6 +313,7 @@ const AlertsHomework: React.FC = () => {
       showResults={showResults}
       onStartHomework={startHomework}
       onSubmitHomework={submitHomework}
+      onTryAgain={resetHomework}
     >
       {isStarted && !showResults && (
         <div className="cards-grid large">

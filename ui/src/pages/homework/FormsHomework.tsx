@@ -16,7 +16,8 @@ const FormsHomework: React.FC = () => {
     completedScenarios,
     totalPoints,
     startHomework,
-    submitHomework
+    submitHomework,
+    resetHomework
   } = useHomeworkState({
     maxPoints: 100,
     totalScenarios: formsHomeworkScenarios.length
@@ -79,6 +80,7 @@ const FormsHomework: React.FC = () => {
       showResults={showResults}
       onStartHomework={startHomework}
       onSubmitHomework={submitHomework}
+      onTryAgain={resetHomework}
     >
       {isStarted && !showResults && (
         <>
