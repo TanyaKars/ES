@@ -73,44 +73,48 @@ const HomeworkLayout: React.FC<HomeworkLayoutProps> = ({
 
       <div className="homework-container">
         <div className="homework-header">
-          <h1>{title.replace(/^.*: /, '').replace(' - ', ' - ')}</h1>
-          <p>{description}</p>
-          
-          <div className="homework-stats">
-            <StatCard 
-              title="Progress" 
-              value={`${completedScenarios}/${totalScenarios} scenarios`} 
-            />
-            <StatCard 
-              title="Points" 
-              value={`${totalPoints}/${maxPoints}`} 
-            />
-            <StatCard 
-              title="Status" 
-              value={totalPoints >= passingScore ? 'PASSING' : 'NEEDS WORK'} 
-            />
+          <div className="homework-header-content">
+            <h1>{title.replace(/^.*: /, '').replace(' - ', ' - ')}</h1>
+            <p>{description}</p>
           </div>
+          
+          <div className="homework-header-sidebar">
+            <div className="homework-stats">
+              <StatCard 
+                title="Progress" 
+                value={`${completedScenarios}/${totalScenarios} scenarios`} 
+              />
+              <StatCard 
+                title="Points" 
+                value={`${totalPoints}/${maxPoints}`} 
+              />
+              <StatCard 
+                title="Status" 
+                value={totalPoints >= passingScore ? 'PASSING' : 'NEEDS WORK'} 
+              />
+            </div>
 
-          <div className="homework-controls">
-            {!isStarted && !showResults && (
-              <button className="homework-btn primary" onClick={onStartHomework}>
-                Start Homework
-              </button>
-            )}
-            {isStarted && !showResults && (
-              <button className="homework-btn success" onClick={onSubmitHomework}>
-                Submit Homework
-              </button>
-            )}
-            {showResults && (
-              <button 
-                className="homework-btn primary" 
-                onClick={onTryAgain}
-                data-testid="try-again-btn"
-              >
-                Try Again
-              </button>
-            )}
+            <div className="homework-controls">
+              {!isStarted && !showResults && (
+                <button className="homework-btn primary" onClick={onStartHomework}>
+                  Start Homework
+                </button>
+              )}
+              {isStarted && !showResults && (
+                <button className="homework-btn success" onClick={onSubmitHomework}>
+                  Submit Homework
+                </button>
+              )}
+              {showResults && (
+                <button 
+                  className="homework-btn primary" 
+                  onClick={onTryAgain}
+                  data-testid="try-again-btn"
+                >
+                  Try Again
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
