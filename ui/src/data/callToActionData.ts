@@ -84,5 +84,61 @@ export const callToActionConfigs = {
     buttonTestId: "dashboard-button",
     containerTestId: "completion-section",
     icon: "🏆"
+  },
+  shadowDomHomework: {
+    title: "Ready for Homework?",
+    description: "Perfect your shadow DOM handling skills with advanced interaction scenarios!",
+    buttonText: "Start Shadow DOM Homework →",
+    buttonRoute: "/homework/shadow-dom",
+    buttonTestId: "homework-button",
+    containerTestId: "homework-section"
+  },
+
+  shadowDomComplete: {
+    title: "Assignment Complete!",
+    description: "Outstanding! You've mastered shadow DOM testing. Ready for the final challenge?",
+    buttonText: "Continue to Next Class: Mouse Actions →",
+    buttonRoute: "/class/mouse-actions",
+    buttonTestId: "next-class-button",
+    containerTestId: "completion-section",
+    icon: "🏆"
+  },
+  downloadUploadFilesHomework: {
+    title: "Ready for Homework?",
+    description: "Perfect your download/upload file handling skills with advanced interaction scenarios!",
+    buttonText: "Start Download/Upload Files Homework →",
+    buttonRoute: "/homework/download-upload-files",
+    buttonTestId: "homework-button",
+    containerTestId: "homework-section"
+  },
+
+  downloadUploadFilesComplete: {
+    title: "Assignment Complete!",
+    description: "Outstanding! You've mastered download/upload file testing. Ready for the final challenge?",
+    buttonText: "Continue to Next Class: Shadow DOM →",
+    buttonRoute: "/class/shadow-dom",
+    buttonTestId: "next-class-button",
+    containerTestId: "completion-section",
+    icon: "🏆"
+  },
+
+  tableHomework: {
+    title: "Ready for Homework?",
+    description: "Perfect your table handling skills with advanced interaction scenarios!",
+    buttonText: "Start Table Homework →",
+    buttonRoute: "/homework/table",
+    buttonTestId: "homework-button",
+    containerTestId: "homework-section"
+  },
+
+  tableComplete: {
+    title: "Assignment Complete!",
+    description: "Outstanding! You've mastered table testing. Ready for the final challenge?",
+    buttonText: "Continue to Next Class: Mouse Actions →",
+    buttonRoute: "/class/mouse-actions",
+    buttonTestId: "next-class-button",
+    containerTestId: "completion-section",
+    icon: "🏆"
   }
+  
 } as const;

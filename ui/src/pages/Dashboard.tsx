@@ -63,6 +63,36 @@ const Dashboard: React.FC = () => {
       route: '/class/mouse-actions',
       testId: 'mouse-actions-course',
       progress: 0
+    },
+     {
+      id: 'download/upload files',
+      classNumber: 5,
+      title: 'Download/Upload Files',
+      description: 'Learn to test file download and upload functionalities',
+      icon: '📥',
+      route: '/class/download-upload-files',
+      testId: 'download-upload-files-course',
+      progress: 0
+    },
+    {
+      id: 'shadow-dom',
+      classNumber: 6,
+      title: 'Shadow DOM',
+      description: 'Learn to test elements within shadow DOMs',
+      icon: '🕵️‍♂️',
+      route: '/class/shadow-dom',
+      testId: 'shadow-dom-course',
+      progress: 0
+    },
+    {
+      id: 'tables',
+      classNumber: 7,
+      title: 'Tables',
+      description: 'Learn to test tables, sorting, filtering, and pagination',
+      icon: '📊',
+      route: '/class/tables',
+      testId: 'tables-course',
+      progress: 0
     }
   ];
 
