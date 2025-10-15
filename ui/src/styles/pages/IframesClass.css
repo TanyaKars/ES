@@ -1,0 +1,128 @@
+/* iFrames Class Specific Styles */
+.iframe-controls {
+  margin: 30px 0;
+  padding: 20px;
+  background: var(--background-light);
+  border-radius: var(--radius-sm);
+}
+
+.iframe-controls h3 {
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.example-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.iframe-btn {
+  padding: 12px 20px;
+  border: 2px solid var(--primary-blue);
+  background: transparent;
+  color: var(--primary-blue);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.iframe-btn:hover {
+  background: var(--primary-blue);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.iframe-btn.active {
+  background: var(--primary-blue);
+  color: white;
+  box-shadow: var(--shadow-button);
+}
+
+.iframe-container {
+  margin: 30px 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: white;
+}
+
+.iframe-info {
+  padding: 15px;
+  background: var(--background-light);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+}
+
+.iframe-info p {
+  margin: 5px 0;
+  color: var(--text-secondary);
+}
+
+.iframe-info strong {
+  color: var(--text-primary);
+}
+
+.demo-iframe {
+  border: none;
+  display: block;
+  width: 100%;
+}
+
+.iframe-theory,
+.iframe-examples,
+.iframe-testing {
+  margin-bottom: 40px;
+}
+
+.iframe-theory h2,
+.iframe-examples h2,
+.iframe-testing h2 {
+  color: var(--primary-blue);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.iframe-theory h3,
+.testing-tips h3 {
+  color: var(--text-primary);
+  margin: 20px 0 10px 0;
+  font-size: 1.3rem;
+}
+
+.iframe-theory ul,
+.testing-tips ul {
+  list-style-position: inside;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.iframe-theory li,
+.testing-tips li {
+  margin-bottom: 10px;
+}
+
+.testing-tips {
+  background: var(--background-light);
+  padding: 25px;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--primary-green);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .example-buttons {
+    flex-direction: column;
+  }
+  
+  .iframe-btn {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .iframe-info {
+    font-size: 0.8rem;
+  }
+}

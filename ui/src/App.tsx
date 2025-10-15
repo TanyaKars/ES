@@ -8,10 +8,15 @@ import Dashboard from './pages/Dashboard.tsx';
 // Class Pages
 import FormsClass from './pages/classes/FormsClass.tsx';
 import AlertsClass from './pages/classes/AlertsClass.tsx';
+import IframesClass from './pages/classes/IframesClass.tsx';
 
 // Homework Pages
 import FormsHomework from './pages/homework/FormsHomework.tsx';
 import AlertsHomework from './pages/homework/AlertsHomework.tsx';
+
+// Iframe Examples
+import TextAreaExample from './pages/classes/iframes/examples/TextAreaExample.tsx';
+import FormExample from './pages/classes/iframes/examples/FormExample.tsx';
 
 import './App.css';
 
@@ -28,10 +33,15 @@ const App: React.FC = () => {
           {/* Class Routes */}
           <Route path="/class/forms" element={<FormsClass />} />
           <Route path="/class/alerts" element={<AlertsClass />} />
+          <Route path="/class/iframes" element={<IframesClass />} />
           
           {/* Homework Routes */}
           <Route path="/homework/forms" element={<FormsHomework />} />
           <Route path="/homework/alerts" element={<AlertsHomework />} />
+          
+          {/* Iframe Examples */}
+          <Route path="/class/iframes/examples/form" element={<FormExample />} />
+          <Route path="/class/iframes/examples/textarea" element={<TextAreaExample />} />
         </Routes>
       </div>
     </Router>
