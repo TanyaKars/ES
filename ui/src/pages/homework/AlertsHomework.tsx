@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import HomeworkLayout from '../../components/homework/HomeworkLayout';
 import HomeworkResults from '../../components/homework/HomeworkResults';
+import CallToAction from '../../components/CallToAction.tsx';
 import InfoCard from '../../components/alert-elements/InfoCard';
 import AlertHomeworkScenarioCard from '../../components/alert-elements/AlertHomeworkScenarioCard';
 import { useAuth } from '../../hooks/useAuth';
 import { useHomeworkState } from '../../hooks/useHomeworkState';
+import { callToActionConfigs } from '../../data/callToActionData.ts';
 import { alertsHomeworkScenarios, homeworkConfig } from '../../data/alerts/alertsHomeworkData';
 
 const AlertsHomework: React.FC = () => {
@@ -353,6 +355,10 @@ const AlertsHomework: React.FC = () => {
             />
           </div>
         </div>
+      )}
+
+      {showResults && (
+        <CallToAction {...callToActionConfigs.alertsComplete} />
       )}
     </HomeworkLayout>
   );

@@ -312,7 +312,9 @@ const FormsHomework: React.FC = () => {
         />
       )}
 
-      <CallToAction {...callToActionConfigs.formsComplete} />
+      {showResults && (
+        <CallToAction {...callToActionConfigs.formsComplete} />
+      )}
     </HomeworkLayout>
   );
 };

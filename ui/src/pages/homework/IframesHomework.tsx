@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import HomeworkLayout from '../../components/homework/HomeworkLayout';
 import HomeworkResults from '../../components/homework/HomeworkResults';
+import CallToAction from '../../components/CallToAction.tsx';
 import InfoCard from '../../components/alert-elements/InfoCard';
 import { useAuth } from '../../hooks/useAuth';
 import { useHomeworkState } from '../../hooks/useHomeworkState';
+import { callToActionConfigs } from '../../data/callToActionData.ts';
 import { iframesHomeworkScenarios, iframeHomeworkConfig } from '../../data/iframes/iframesHomeworkData';
 import '../../styles/pages/IframesClass.css';
 
@@ -61,6 +63,7 @@ const IframesHomework: React.FC = () => {
           totalPoints={totalPoints}
           maxPoints={iframeHomeworkConfig.maxPoints}
         />
+        <CallToAction {...callToActionConfigs.iframesComplete} />
       </HomeworkLayout>
     );
   }
