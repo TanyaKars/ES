@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard.tsx';
 import FormsClass from './pages/classes/FormsClass.tsx';
 import AlertsClass from './pages/classes/AlertsClass.tsx';
 import IframesClass from './pages/classes/IframesClass.tsx';
+import MouseActionsClass from './pages/classes/MouseActionsClass.tsx';
 
 // Homework Pages
 import FormsHomework from './pages/homework/FormsHomework.tsx';
@@ -39,6 +40,7 @@ const App: React.FC = () => {
           <Route path="/class/forms" element={<FormsClass />} />
           <Route path="/class/alerts" element={<AlertsClass />} />
           <Route path="/class/iframes" element={<IframesClass />} />
+          <Route path="/class/mouse-actions" element={<MouseActionsClass />} />
           
           {/* Homework Routes */}
           <Route path="/homework/forms" element={<FormsHomework />} />

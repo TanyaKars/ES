@@ -1,0 +1,143 @@
+/* Interaction History Component Styles */
+
+.interaction-history {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fff8e1, #fff3c4);
+  border-radius: 8px;
+  border: 1px solid #ffcc02;
+}
+
+.interaction-history h3 {
+  color: #f57f17;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.interaction-history h3:before {
+  content: "📝";
+}
+
+.no-history {
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  border: 1px dashed #ccc;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.history-item {
+  padding: 0.75rem;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #fff176;
+  transition: all 0.2s ease;
+}
+
+.history-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.history-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  gap: 0.75rem;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.action-icon {
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.action-label {
+  font-weight: bold;
+  color: #f57f17;
+  text-transform: capitalize;
+}
+
+.element-label {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.result {
+  color: #2e7d32;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.timestamp {
+  color: #999;
+  font-size: 0.8rem;
+  font-family: monospace;
+}
+
+.history-details {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #f5f5f5;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #666;
+  max-height: 100px;
+  overflow: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .history-header {
+    grid-template-columns: auto 1fr auto;
+    gap: 0.5rem;
+  }
+  
+  .element-label {
+    display: none; /* Hide element labels on mobile for space */
+  }
+  
+  .result {
+    grid-column: span 2;
+    margin-top: 0.25rem;
+  }
+  
+  .timestamp {
+    grid-column: span 3;
+    margin-top: 0.25rem;
+    text-align: right;
+  }
+}
+
+/* Scrollbar styling for history list */
+.history-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.history-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+  background: #ffcc02;
+  border-radius: 3px;
+}
+
+.history-list::-webkit-scrollbar-thumb:hover {
+  background: #f57f17;
+}

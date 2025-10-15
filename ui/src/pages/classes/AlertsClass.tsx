@@ -3,14 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header.tsx';
 import NavigationBar from '../../components/NavigationBar.tsx';
 import AlertCard from '../../components/alert-elements/AlertCard.tsx';
-import AlertHistory from '../../components/alert-elements/AlertHistory.tsx';
+import InteractionHistory, { InteractionHistoryEntry } from '../../components/shared/InteractionHistory.tsx';
 import CallToAction from '../../components/CallToAction.tsx';
 import {
-  alertButtons,
-  alertsClassScenarios,
-  alertsClassInitialState
+  alertButtons
 } from '../../data/alerts/alertsClassData';
 import { callToActionConfigs } from '../../data/callToActionData.ts';
+import '../../styles/components/InteractionHistory.css';
 
 interface User {
   email: string;
@@ -21,7 +20,7 @@ interface User {
 const AlertsClass: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
-  const [alertHistory, setAlertHistory] = useState(alertsClassInitialState.alertHistory);
+  const [interactionHistory, setInteractionHistory] = useState<InteractionHistoryEntry[]>([]);
   const [promptResult, setPromptResult] = useState<string | null>(null);
 
   useEffect(() => {
@@ -44,7 +43,8 @@ const AlertsClass: React.FC = () => {
     // For alerts and AJAX alerts, result is the message
     // For confirm, result is boolean (true/false)  
     // For prompt, result is string or null
-    const message = (type === 'alert' || type === 'ajax') ? result : `${type} dialog`;
+    const action = `${type} dialog`;
+    const element = type === 'ajax' ? 'AJAX alert' : `${type} dialog`;
     
     // Update prompt result if it's a prompt
     if (type === 'prompt') {
@@ -52,17 +52,19 @@ const AlertsClass: React.FC = () => {
     }
     
     const newHistoryEntry = {
-      type,
-      message,
+      type: 'alert',
+      action,
+      element,
       result,
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      details: result
     };
 
-    setAlertHistory(prev => [...prev, newHistoryEntry]);
+    setInteractionHistory(prev => [...prev, newHistoryEntry]);
   };
 
   const clearHistory = () => {
-    setAlertHistory([]);
+    setInteractionHistory([]);
   };
 
   const clearPromptResult = () => {
@@ -136,9 +138,13 @@ const AlertsClass: React.FC = () => {
           </div>
         </div>
 
-        <div className="history-section">
-          <AlertHistory history={alertHistory} />
-          {alertHistory.length > 0 && (
+        <InteractionHistory 
+          history={interactionHistory}
+          title="Alerts Interaction History"
+          maxEntries={10}
+        />
+        {interactionHistory.length > 0 && (
+          <div style={{ textAlign: 'center', margin: '1rem 0' }}>
             <button
               onClick={clearHistory}
               className="btn btn-secondary"
@@ -146,8 +152,8 @@ const AlertsClass: React.FC = () => {
             >
               Clear History
             </button>
-          )}
-        </div>
+          </div>
+        )}
 
         <CallToAction {...callToActionConfigs.alertsHomework} />
       </div>

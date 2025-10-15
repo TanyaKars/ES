@@ -6,6 +6,7 @@ import DropdownGroup from '../../components/form-elements/DropdownGroup.tsx';
 import CheckboxGroup from '../../components/form-elements/CheckboxGroup.tsx';
 import RadioGroup from '../../components/form-elements/RadioGroup.tsx';
 import TextAreaGroup from '../../components/form-elements/TextAreaGroup.tsx';
+import InteractionHistory, { InteractionHistoryEntry } from '../../components/shared/InteractionHistory.tsx';
 import CallToAction from '../../components/CallToAction.tsx';
 import {
   formsClassDropdowns,
@@ -13,10 +14,10 @@ import {
   formsClassRadioButtons,
   formsClassDisabledCheckboxes,
   formsClassTextAreas,
-  formsClassScenarios,
   formsClassInitialState
 } from '../../data/forms/formsClassData';
 import { callToActionConfigs } from '../../data/callToActionData.ts';
+import '../../styles/components/InteractionHistory.css';
 
 interface User {
   email: string;
@@ -34,6 +35,24 @@ const FormsClass: React.FC = () => {
   const [radioValue, setRadioValue] = useState(formsClassInitialState.radio);
   const [disabledCheckboxValues, setDisabledCheckboxValues] = useState(formsClassInitialState.disabledCheckboxes);
   const [textAreaValues, setTextAreaValues] = useState(formsClassInitialState.textAreas);
+  
+  // Interaction history tracking
+  const [interactionHistory, setInteractionHistory] = useState<InteractionHistoryEntry[]>([]);
+
+  // Helper function to add interaction to history
+  const addToHistory = (type: string, action: string, element?: string, result?: any) => {
+    setInteractionHistory(prev => [
+      ...prev,
+      {
+        type,
+        action,
+        element,
+        result,
+        timestamp: Date.now(),
+        details: result
+      }
+    ]);
+  };
 
   useEffect(() => {
     // Check if user is logged in
@@ -54,20 +73,33 @@ const FormsClass: React.FC = () => {
   // Handler functions
   const handleDropdownChange = (id: string, value: string) => {
     setDropdownValues(prev => ({ ...prev, [id]: value }));
+    addToHistory('form', 'dropdown selection', `${id} dropdown`, value);
   };
 
   const handleCheckboxChange = (id: string) => {
-    setCheckboxValues(prev => ({ ...prev, [id]: !prev[id as keyof typeof prev] }));
+    const newValue = !checkboxValues[id as keyof typeof checkboxValues];
+    setCheckboxValues(prev => ({ ...prev, [id]: newValue }));
+    addToHistory('form', 'checkbox toggle', `${id} checkbox`, newValue ? 'checked' : 'unchecked');
   };
 
   const handleDisabledCheckboxChange = (id: string) => {
     if (id !== 'lettuce') { // Lettuce is disabled
-      setDisabledCheckboxValues(prev => ({ ...prev, [id]: !prev[id as keyof typeof prev] }));
+      const newValue = !disabledCheckboxValues[id as keyof typeof disabledCheckboxValues];
+      setDisabledCheckboxValues(prev => ({ ...prev, [id]: newValue }));
+      addToHistory('form', 'checkbox toggle', `${id} checkbox`, newValue ? 'checked' : 'unchecked');
+    } else {
+      addToHistory('form', 'interaction blocked', `${id} checkbox`, 'disabled element');
     }
   };
 
   const handleTextAreaChange = (id: string, value: string) => {
     setTextAreaValues(prev => ({ ...prev, [id]: value }));
+    addToHistory('form', 'text input', `${id} textarea`, `${value.length} characters`);
+  };
+
+  const handleRadioChange = (value: string) => {
+    setRadioValue(value);
+    addToHistory('form', 'radio selection', 'age group radio', value);
   };
 
   const handleTextAreaChangeWithAutoExpand = (e: React.ChangeEvent<HTMLTextAreaElement>, setter: (value: string) => void) => {
@@ -85,6 +117,7 @@ const FormsClass: React.FC = () => {
     setRadioValue(formsClassInitialState.radio);
     setDisabledCheckboxValues(formsClassInitialState.disabledCheckboxes);
     setTextAreaValues(formsClassInitialState.textAreas);
+    addToHistory('form', 'reset', 'all form elements', 'form reset to initial state');
   };
 
   if (!user) {
@@ -135,7 +168,7 @@ const FormsClass: React.FC = () => {
             name="color"
             options={formsClassRadioButtons}
             value={radioValue}
-            onChange={setRadioValue}
+            onChange={handleRadioChange}
             containerTestId="radio-group"
             statusTestId="radio-status"
             statusLabel="Selected color"
@@ -171,6 +204,12 @@ const FormsClass: React.FC = () => {
             </button>
           </div>
         </div>
+
+        <InteractionHistory 
+          history={interactionHistory}
+          title="Forms Interaction History"
+          maxEntries={10}
+        />
 
         <CallToAction {...callToActionConfigs.formsHomework} />
       </div>
