@@ -13,10 +13,15 @@ import IframesClass from './pages/classes/IframesClass.tsx';
 // Homework Pages
 import FormsHomework from './pages/homework/FormsHomework.tsx';
 import AlertsHomework from './pages/homework/AlertsHomework.tsx';
+import IframesHomework from './pages/homework/IframesHomework.tsx';
 
 // Iframe Examples
 import TextAreaExample from './pages/classes/iframes/examples/TextAreaExample.tsx';
 import FormExample from './pages/classes/iframes/examples/FormExample.tsx';
+
+// Iframe Homework
+import NestedIframeExample from './pages/classes/iframes/homework/NestedIframeExample.tsx';
+import ComplexNestedIframe from './pages/classes/iframes/homework/ComplexNestedIframe.tsx';
 
 import './App.css';
 
@@ -38,10 +43,15 @@ const App: React.FC = () => {
           {/* Homework Routes */}
           <Route path="/homework/forms" element={<FormsHomework />} />
           <Route path="/homework/alerts" element={<AlertsHomework />} />
+          <Route path="/homework/iframes" element={<IframesHomework />} />
           
           {/* Iframe Examples */}
           <Route path="/class/iframes/examples/form" element={<FormExample />} />
           <Route path="/class/iframes/examples/textarea" element={<TextAreaExample />} />
+          
+          {/* Iframe Homework */}
+          <Route path="/class/iframes/homework/nested" element={<NestedIframeExample />} />
+          <Route path="/class/iframes/homework/complex" element={<ComplexNestedIframe />} />
         </Routes>
       </div>
     </Router>

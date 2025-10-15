@@ -19,7 +19,6 @@ const IframesClass: React.FC = () => {
 
   const iframeExamples = [
     { url: '/class/iframes/examples/form', label: 'Form with TextAreaGroup', height: '400px' },
-    { url: '/class/iframes/examples/textarea', label: 'Simple TextArea Example', height: '300px' },
     { url: 'https://shouldideploy.today/', label: 'External Site Example', height: '500px' }
   ];
 
