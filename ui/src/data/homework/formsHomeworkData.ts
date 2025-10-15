@@ -79,3 +79,10 @@ export const formsHomeworkScenarios: HomeworkScenarioData[] = [
     ]
   }
 ];
+
+export const formsHomeworkConfig = {
+  maxPoints: 100,
+  passingScore: 70,
+  allowRetry: true,
+  showHints: true
+};

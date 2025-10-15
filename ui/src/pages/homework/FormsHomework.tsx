@@ -3,10 +3,11 @@ import HomeworkLayout from '../../components/homework/HomeworkLayout';
 import HomeworkResults from '../../components/homework/HomeworkResults';
 import CallToAction from '../../components/CallToAction.tsx';
 import HomeworkScenarioCard from '../../components/alert-elements/HomeworkScenarioCard.tsx';
+import InfoCard from '../../components/alert-elements/InfoCard';
 import { useAuth } from '../../hooks/useAuth';
 import { useHomeworkState } from '../../hooks/useHomeworkState';
 import { callToActionConfigs } from '../../data/callToActionData.ts';
-import { formsHomeworkScenarios } from '../../data/homework/formsHomeworkData.ts';
+import { formsHomeworkScenarios, formsHomeworkConfig } from '../../data/homework/formsHomeworkData.ts';
 
 const FormsHomework: React.FC = () => {
   const { user, isLoading } = useAuth();
@@ -82,6 +83,22 @@ const FormsHomework: React.FC = () => {
       onSubmitHomework={submitHomework}
       onTryAgain={resetHomework}
     >
+      {!isStarted && !showResults && (
+        <div className="pre-start-info">
+          <h2>Before You Start</h2>
+          <div className="cards-grid small">
+            <InfoCard 
+              title="Passing Score" 
+              description={`${formsHomeworkConfig.passingScore}% (${(formsHomeworkConfig.maxPoints * formsHomeworkConfig.passingScore / 100)} points)`} 
+            />
+            <InfoCard 
+              title="Retry Policy" 
+              description={formsHomeworkConfig.allowRetry ? 'Unlimited retries allowed' : 'One attempt only'} 
+            />
+          </div>
+        </div>
+      )}
+
       {isStarted && !showResults && (
         <>
           <div className="practice-section">
