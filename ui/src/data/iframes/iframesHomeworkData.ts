@@ -19,38 +19,6 @@ export interface IframeUserStats {
 
 export const iframesHomeworkScenarios: IframeHomeworkScenario[] = [
   {
-    id: 'simple-iframe-interaction',
-    title: 'Basic iFrame Navigation',
-    description: 'Navigate and interact with content inside a single iframe',
-    difficulty: 'Easy',
-    instructions: [
-      'Switch to the iframe context',
-      'Fill out the textarea with "Hello from iframe"',
-      'Submit the form',
-      'Verify the character count is displayed'
-    ],
-    expectedActions: ['switch_to_iframe', 'fill_textarea', 'click_submit', 'verify_count'],
-    points: 25,
-    iframeUrl: '/class/iframes/examples/textarea',
-    height: '300px'
-  },
-  {
-    id: 'form-iframe-validation',
-    title: 'iFrame Form Testing',
-    description: 'Test form validation and submission within an iframe context',
-    difficulty: 'Medium',
-    instructions: [
-      'Navigate to the form iframe',
-      'Fill both message and feedback fields',
-      'Submit the form and handle the alert',
-      'Clear all fields and verify reset'
-    ],
-    expectedActions: ['enter_iframe', 'fill_forms', 'submit_handle_alert', 'clear_verify'],
-    points: 35,
-    iframeUrl: '/class/iframes/examples/form',
-    height: '400px'
-  },
-  {
     id: 'nested-iframe-challenge',
     title: 'Nested iFrame Navigation',
     description: 'Master navigation between outer iframe and inner nested iframe',
@@ -90,7 +58,7 @@ export const iframesHomeworkScenarios: IframeHomeworkScenario[] = [
 ];
 
 export const iframeHomeworkConfig = {
-  maxPoints: 185,
+  maxPoints: 125,
   passingScore: 70,
   allowRetry: true,
   showHints: true

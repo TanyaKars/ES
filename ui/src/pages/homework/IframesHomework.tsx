@@ -5,160 +5,7 @@ import InfoCard from '../../components/alert-elements/InfoCard';
 import { useAuth } from '../../hooks/useAuth';
 import { useHomeworkState } from '../../hooks/useHomeworkState';
 import { iframesHomeworkScenarios, iframeHomeworkConfig } from '../../data/iframes/iframesHomeworkData';
-
-interface IframeScenarioCardProps {
-  scenario: {
-    id: string;
-    title: string;
-    description: string;
-    difficulty: 'Easy' | 'Medium' | 'Hard';
-    instructions: string[];
-    points: number;
-    iframeUrl?: string;
-    height?: string;
-  };
-  isCompleted: boolean;
-  onStart: (scenarioId: string) => void;
-}
-
-const IframeScenarioCard: React.FC<IframeScenarioCardProps> = ({ scenario, isCompleted, onStart }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'Easy': return '#4caf50';
-      case 'Medium': return '#ff9800';
-      case 'Hard': return '#f44336';
-      default: return '#2196f3';
-    }
-  };
-
-  return (
-    <div className="card-base card-medium" style={{ 
-      border: isCompleted ? '2px solid #4caf50' : '1px solid #ddd',
-      backgroundColor: isCompleted ? '#f1f8e9' : 'white'
-    }}>
-      <div className="card-header">
-        <h3 style={{ 
-          color: '#333', 
-          marginBottom: '10px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px'
-        }}>
-          {scenario.title}
-          {isCompleted && <span style={{ color: '#4caf50', fontSize: '16px' }}>✅</span>}
-        </h3>
-        
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center',
-          marginBottom: '10px'
-        }}>
-          <span style={{ 
-            backgroundColor: getDifficultyColor(scenario.difficulty),
-            color: 'white',
-            padding: '4px 8px',
-            borderRadius: '12px',
-            fontSize: '12px',
-            fontWeight: 'bold'
-          }}>
-            {scenario.difficulty}
-          </span>
-          
-          <span style={{ 
-            backgroundColor: '#e3f2fd',
-            color: '#1976d2',
-            padding: '4px 8px',
-            borderRadius: '12px',
-            fontSize: '12px',
-            fontWeight: 'bold'
-          }}>
-            {scenario.points} points
-          </span>
-        </div>
-      </div>
-
-      <p style={{ color: '#666', marginBottom: '15px', lineHeight: '1.5' }}>
-        {scenario.description}
-      </p>
-
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        style={{
-          backgroundColor: 'transparent',
-          border: '1px solid #2196f3',
-          color: '#2196f3',
-          padding: '8px 16px',
-          borderRadius: '4px',
-          cursor: 'pointer',
-          fontSize: '12px',
-          marginBottom: '10px'
-        }}
-      >
-        {isExpanded ? '🔼 Hide Details' : '🔽 Show Instructions'}
-      </button>
-
-      {isExpanded && (
-        <div style={{
-          backgroundColor: '#f8f9fa',
-          padding: '15px',
-          borderRadius: '6px',
-          marginBottom: '15px',
-          border: '1px solid #e9ecef'
-        }}>
-          <h4 style={{ color: '#333', marginBottom: '10px', fontSize: '14px' }}>
-            📋 Testing Instructions:
-          </h4>
-          <ol style={{ 
-            margin: '0', 
-            paddingLeft: '20px',
-            color: '#555',
-            fontSize: '13px',
-            lineHeight: '1.6'
-          }}>
-            {scenario.instructions.map((instruction, index) => (
-              <li key={index} style={{ marginBottom: '5px' }}>
-                {instruction}
-              </li>
-            ))}
-          </ol>
-
-          {scenario.iframeUrl && (
-            <div style={{ marginTop: '15px' }}>
-              <h4 style={{ color: '#333', marginBottom: '8px', fontSize: '14px' }}>
-                🎯 Testing Environment:
-              </h4>
-              <iframe
-                src={scenario.iframeUrl}
-                width="100%"
-                height={scenario.height || '300px'}
-                title={`${scenario.title} Testing Environment`}
-                style={{
-                  border: '2px solid #2196f3',
-                  borderRadius: '4px',
-                  backgroundColor: 'white'
-                }}
-                sandbox="allow-same-origin allow-scripts allow-forms"
-              />
-            </div>
-          )}
-        </div>
-      )}
-
-      <div className="card-button-container">
-        <button
-          className="start-scenario-btn"
-          onClick={() => onStart(scenario.id)}
-          data-testid={`start-${scenario.id}`}
-        >
-          {isCompleted ? '🔄 Retry Scenario' : '🚀 Start Challenge'}
-        </button>
-      </div>
-    </div>
-  );
-};
+import '../../styles/pages/IframesClass.css';
 
 const IframesHomework: React.FC = () => {
   const { user, isLoading } = useAuth();
@@ -169,31 +16,22 @@ const IframesHomework: React.FC = () => {
     totalPoints,
     startHomework,
     submitHomework,
-    completeScenario,
     resetHomework
   } = useHomeworkState({
     maxPoints: iframeHomeworkConfig.maxPoints,
     totalScenarios: iframesHomeworkScenarios.length
   });
 
+  const [currentIframeUrl, setCurrentIframeUrl] = useState(iframesHomeworkScenarios[0]?.iframeUrl || '');
+  const [currentIframeHeight, setCurrentIframeHeight] = useState(iframesHomeworkScenarios[0]?.height || '400px');
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  const startScenario = (scenarioId: string) => {
-    if (completedScenarios.includes(scenarioId)) {
-      if (!confirm('You have already completed this scenario. Do you want to retry?')) {
-        return;
-      }
-    }
-
-    // Award points for "completing" the scenario
-    // In a real app, this would be based on actual test results
-    const scenario = iframesHomeworkScenarios.find(s => s.id === scenarioId);
-    if (scenario) {
-      alert(`Starting ${scenario.title}!\n\nThis scenario is worth ${scenario.points} points.\n\nIn a real testing environment, you would now run your automated tests against the iframe content.`);
-      completeScenario(scenarioId, scenario.points);
-    }
+  const handleIframeChange = (url: string, height: string) => {
+    setCurrentIframeUrl(url);
+    setCurrentIframeHeight(height);
   };
 
   if (showResults) {
@@ -296,16 +134,44 @@ const IframesHomework: React.FC = () => {
             </div>
           </div>
 
-          <div className="cards-grid medium">
-            {iframesHomeworkScenarios.map((scenario) => (
-              <IframeScenarioCard
-                key={scenario.id}
-                scenario={scenario}
-                isCompleted={completedScenarios.includes(scenario.id)}
-                onStart={startScenario}
-              />
-            ))}
-          </div>
+          <section className="iframe-examples">
+            <h2>Testing Environments</h2>
+            
+            <div className="iframe-controls">
+              <h3>Choose a Scenario to Test:</h3>
+              <div className="example-buttons">
+                {iframesHomeworkScenarios.map((scenario, index) => (
+                  <button
+                    key={index}
+                    className={`iframe-btn ${currentIframeUrl === scenario.iframeUrl ? 'active' : ''}`}
+                    onClick={() => handleIframeChange(scenario.iframeUrl || '', scenario.height || '400px')}
+                    data-testid={`iframe-scenario-${index}`}
+                  >
+                    {scenario.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="iframe-container">
+              <div className="iframe-info">
+                <p><strong>Current Environment:</strong> {iframesHomeworkScenarios.find(s => s.iframeUrl === currentIframeUrl)?.title || 'Select a scenario'}</p>
+                <p><strong>Height:</strong> {currentIframeHeight}</p>
+              </div>
+              
+              {currentIframeUrl && (
+                <iframe
+                  src={currentIframeUrl}
+                  width="100%"
+                  height={currentIframeHeight}
+                  title="Homework Testing Environment"
+                  className="demo-iframe"
+                  data-testid="homework-iframe"
+                  sandbox="allow-same-origin allow-scripts allow-forms"
+                />
+              )}
+            </div>
+          </section>
         </div>
       )}
     </HomeworkLayout>

@@ -29,7 +29,8 @@ const FormExample: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    alert(`Message: ${textAreaValues.message}\nFeedback: ${textAreaValues.feedback}`);
+    console.log(`Message: ${textAreaValues.message}\nFeedback: ${textAreaValues.feedback}`);
+    // Form submitted successfully
   };
 
   const handleClear = () => {
@@ -58,14 +59,6 @@ const FormExample: React.FC = () => {
         }}>
           iFrame Form Example
         </h2>
-        
-        <p style={{ 
-          color: '#666', 
-          marginBottom: '20px',
-          textAlign: 'center'
-        }}>
-          This content is loaded inside an iframe and reuses the TextAreaGroup component.
-        </p>
 
         <TextAreaGroup
           title="Contact Form"
@@ -112,18 +105,6 @@ const FormExample: React.FC = () => {
           >
             Clear
           </button>
-        </div>
-
-        <div style={{ 
-          marginTop: '20px', 
-          padding: '10px',
-          backgroundColor: '#e9ecef',
-          borderRadius: '5px',
-          fontSize: '12px',
-          color: '#495057'
-        }}>
-          <strong>Note:</strong> This is iframe content demonstrating component reuse. 
-          The TextAreaGroup component is being used within an iframe context.
         </div>
       </div>
     </div>

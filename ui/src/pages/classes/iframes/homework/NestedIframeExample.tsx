@@ -9,7 +9,8 @@ const NestedIframeExample: React.FC = () => {
   };
 
   const handleOuterSubmit = () => {
-    alert(`Outer iframe message: ${outerMessage}`);
+    console.log(`Outer iframe message: ${outerMessage}`);
+    // Outer form submitted successfully
   };
 
   return (

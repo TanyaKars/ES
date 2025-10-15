@@ -17,8 +17,8 @@ interface UseHomeworkStateReturn {
 }
 
 export const useHomeworkState = ({ 
-  maxPoints, 
-  totalScenarios 
+  maxPoints: _maxPoints, 
+  totalScenarios: _totalScenarios 
 }: UseHomeworkStateProps): UseHomeworkStateReturn => {
   const [isStarted, setIsStarted] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -35,7 +35,6 @@ export const useHomeworkState = ({
   const submitHomework = () => {
     setShowResults(true);
     setIsStarted(false);
-    alert(`Homework submitted! You completed ${completedScenarios.length}/${totalScenarios} scenarios with ${totalPoints}/${maxPoints} points.`);
   };
 
   const completeScenario = (scenarioId: string, points: number) => {
