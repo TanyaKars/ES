@@ -84,8 +84,8 @@ export const formsClassScenarios: ScenarioConfig[] = [
     items: [
       { text: 'Test dropdown option selection' },
       { text: 'Verify default placeholder values' },
-      { text: 'Test multiple dropdown interactions' },
-      { text: 'Verify selected values are displayed correctly' }
+      { text: 'Verify selected values are displayed correctly' },
+      { text: 'Practice scenarios using loops' }
     ]
   },
   {
@@ -97,7 +97,7 @@ export const formsClassScenarios: ScenarioConfig[] = [
       { text: 'Test individual checkbox toggle' },
       { text: 'Test multiple checkbox selections' },
       { text: 'Verify checkbox state persistence' },
-      { text: 'Test disabled checkbox behavior' }
+      { text: 'Practice scenarios using loops' }
     ]
   },
   {

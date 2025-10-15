@@ -6,7 +6,6 @@ import DropdownGroup from '../../components/form-elements/DropdownGroup.tsx';
 import CheckboxGroup from '../../components/form-elements/CheckboxGroup.tsx';
 import RadioGroup from '../../components/form-elements/RadioGroup.tsx';
 import TextAreaGroup from '../../components/form-elements/TextAreaGroup.tsx';
-import ScenariosGrid from '../../components/ScenariosGrid.tsx';
 import CallToAction from '../../components/CallToAction.tsx';
 import {
   formsClassDropdowns,
@@ -107,9 +106,13 @@ const FormsClass: React.FC = () => {
       />
 
       <div className="class-content">
-        <div className="practice-section">
+         <div className="class-intro">
           <h2>Interactive Form Elements</h2>
-          
+          <p>
+            Learn to work with most common page elements such as dropdown menus, checkboxes, radio buttons, and text areas.
+          </p>
+        </div>
+        <div className="practice-section">          
           <DropdownGroup
             title="Dropdown Menu(s)"
             dropdowns={formsClassDropdowns}
@@ -168,11 +171,6 @@ const FormsClass: React.FC = () => {
             </button>
           </div>
         </div>
-
-        <ScenariosGrid
-          title="Testing Scenarios to Practice"
-          scenarios={formsClassScenarios}
-        />
 
         <CallToAction {...callToActionConfigs.formsHomework} />
       </div>

@@ -300,21 +300,6 @@ const FormsHomework: React.FC = () => {
               </button>
             </div>
           </div>
-
-          <div className="testing-scenarios">
-            <h2>Homework Testing Scenarios</h2>
-            <div className="cards-grid large">
-              {formsHomeworkScenarios.map((scenario, index) => (
-                <HomeworkScenarioCard
-                  key={index}
-                  title={scenario.title}
-                  icon={scenario.icon}
-                  scenarios={scenario.scenarios}
-                  testId={scenario.testId}
-                />
-              ))}
-            </div>
-          </div>
         </>
       )}
 

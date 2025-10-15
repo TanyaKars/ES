@@ -4,7 +4,6 @@ import Header from '../../components/Header.tsx';
 import NavigationBar from '../../components/NavigationBar.tsx';
 import AlertCard from '../../components/alert-elements/AlertCard.tsx';
 import AlertHistory from '../../components/alert-elements/AlertHistory.tsx';
-import ScenariosGrid from '../../components/ScenariosGrid.tsx';
 import CallToAction from '../../components/CallToAction.tsx';
 import {
   alertButtons,
@@ -149,11 +148,6 @@ const AlertsClass: React.FC = () => {
             </button>
           )}
         </div>
-
-        <ScenariosGrid
-          title="Alert Testing Scenarios to Practice"
-          scenarios={alertsClassScenarios}
-        />
 
         <CallToAction {...callToActionConfigs.alertsHomework} />
       </div>
