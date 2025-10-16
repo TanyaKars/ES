@@ -46,107 +46,6 @@
   left: 0;
 }
 
-/* Action Statistics */
-.action-stats {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, #f3e5f5, #e8eaf6);
-  border-radius: 8px;
-  border: 1px solid #ce93d8;
-}
-
-.action-stats h3 {
-  color: #4a148c;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.stat-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-.stat-number {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #4a148c;
-  margin-bottom: 0.5rem;
-}
-
-.stat-label {
-  color: #666;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.stats-controls {
-  text-align: center;
-}
-
-/* Action History */
-.action-history {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, #fff8e1, #fff3c4);
-  border-radius: 8px;
-  border: 1px solid #ffcc02;
-}
-
-.action-history h3 {
-  color: #f57f17;
-  margin-bottom: 1rem;
-}
-
-.history-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.history-entry {
-  display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  gap: 1rem;
-  padding: 0.75rem;
-  background: white;
-  border-radius: 4px;
-  border: 1px solid #fff176;
-  font-size: 0.9rem;
-}
-
-.history-action {
-  font-weight: bold;
-  color: #f57f17;
-  text-transform: capitalize;
-}
-
-.history-element {
-  color: #666;
-}
-
-.history-time {
-  color: #999;
-  font-size: 0.8rem;
-}
-
 /* Practice Section */
 .practice-section {
   margin-top: 2rem;
@@ -370,8 +269,9 @@
 .hover-elements {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
+  gap: 2rem;
+  justify-content: space-evenly;
+  align-items: stretch;
 }
 
 .hover-element {
@@ -424,6 +324,45 @@
 }
 
 .hover-element:hover .default-text {
+  opacity: 0;
+}
+
+/* Class Page Specific Hover Elements */
+.class-hover-element {
+  padding: 1.5rem;
+  background-color: white;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 200px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.class-hover-element:hover {
+  border-color: #4CAF50;
+  background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.class-hover-element.hovered {
+  border-color: #2196F3;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+}
+
+.class-hover-element.sequence-hovered {
+  border-color: #FF9800;
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+}
+
+.class-hover-element:hover .hover-text {
+  opacity: 1;
+}
+
+.class-hover-element:hover .default-text {
   opacity: 0;
 }
 

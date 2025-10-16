@@ -77,18 +77,18 @@ export const callToActionConfigs = {
   },
   
   mouseActionsComplete: {
-    title: "Course Complete!",
-    description: "Congratulations! You've mastered all QA automation fundamentals. Time to put it all together!",
-    buttonText: "Back to Dashboard →",
-    buttonRoute: "/dashboard",
-    buttonTestId: "dashboard-button",
+    title: "Assignment Complete!",
+    description: "Great work! You've completed the mouse actions homework. Ready for the next challenge?",
+    buttonText: "Continue to Next Class: Shadow DOM →",
+    buttonRoute: "/class/shadow-dom",
+    buttonTestId: "next-class-button",
     containerTestId: "completion-section",
-    icon: "🏆"
+    icon: "🖱️"
   },
   shadowDomHomework: {
     title: "Ready for Homework?",
     description: "Perfect your shadow DOM handling skills with advanced interaction scenarios!",
-    buttonText: "Start Shadow DOM Homework →",
+    buttonText: "Continue to Next Class: Mouse Actions →",
     buttonRoute: "/homework/shadow-dom",
     buttonTestId: "homework-button",
     containerTestId: "homework-section"
@@ -97,8 +97,8 @@ export const callToActionConfigs = {
   shadowDomComplete: {
     title: "Assignment Complete!",
     description: "Outstanding! You've mastered shadow DOM testing. Ready for the final challenge?",
-    buttonText: "Continue to Next Class: Mouse Actions →",
-    buttonRoute: "/class/mouse-actions",
+    buttonText: "Start Shadow DOM Homework →",
+    buttonRoute: "/homework/shadow-dom",
     buttonTestId: "next-class-button",
     containerTestId: "completion-section",
     icon: "🏆"

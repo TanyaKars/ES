@@ -5,6 +5,7 @@
 @import './styles/components/HomeworkCommon.css';
 @import './styles/components/FormElements.css';
 @import './styles/components/AlertElements.css';
+@import './styles/components/MouseActionsHomework.css';
 
 /* Import page-specific styles */
 @import './styles/pages/LandingPage.css';

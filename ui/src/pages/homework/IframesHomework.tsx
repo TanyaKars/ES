@@ -138,7 +138,6 @@ const IframesHomework: React.FC = () => {
           </div>
 
           <section className="iframe-examples">
-            <h2>Testing Environments</h2>
             
             <div className="iframe-controls">
               <h3>Choose a Scenario to Test:</h3>

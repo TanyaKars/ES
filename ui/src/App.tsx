@@ -15,6 +15,7 @@ import MouseActionsClass from './pages/classes/MouseActionsClass.tsx';
 import FormsHomework from './pages/homework/FormsHomework.tsx';
 import AlertsHomework from './pages/homework/AlertsHomework.tsx';
 import IframesHomework from './pages/homework/IframesHomework.tsx';
+import MouseActionsHomework from './pages/homework/MouseActionsHomework.tsx';
 
 // Iframe Examples
 import TextAreaExample from './pages/classes/iframes/examples/TextAreaExample.tsx';
@@ -46,6 +47,7 @@ const App: React.FC = () => {
           <Route path="/homework/forms" element={<FormsHomework />} />
           <Route path="/homework/alerts" element={<AlertsHomework />} />
           <Route path="/homework/iframes" element={<IframesHomework />} />
+          <Route path="/homework/mouse-actions" element={<MouseActionsHomework />} />
           
           {/* Iframe Examples */}
           <Route path="/class/iframes/examples/form" element={<FormExample />} />

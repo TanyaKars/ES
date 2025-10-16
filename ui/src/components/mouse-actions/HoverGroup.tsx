@@ -114,7 +114,7 @@ const HoverGroup: React.FC<HoverGroupProps> = ({
           {hovers.map((hover) => (
             <div
               key={hover.id}
-              className={`hover-element ${hoverStates[hover.id] ? 'hovered' : ''} ${requiresSequence && hoverSequence.includes(hover.id) ? 'sequence-hovered' : ''}`}
+              className={`class-hover-element ${hoverStates[hover.id] ? 'hovered' : ''} ${requiresSequence && hoverSequence.includes(hover.id) ? 'sequence-hovered' : ''}`}
               data-testid={hover.testId}
               onMouseEnter={() => handleMouseEnter(hover)}
               onMouseLeave={() => handleMouseLeave(hover)}
@@ -137,13 +137,6 @@ const HoverGroup: React.FC<HoverGroupProps> = ({
         </div>
         
         <div className="hover-controls">
-          <button
-            onClick={resetHovers}
-            className="btn btn-secondary"
-            data-testid="reset-hovers"
-          >
-            Reset Hovers
-          </button>
         </div>
         
         {requiresSequence && (
