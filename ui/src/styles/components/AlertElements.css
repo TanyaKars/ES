@@ -115,9 +115,6 @@
 }
 
 /* Alert Homework Specific Styles */
-.alerts-homework {
-  min-height: 100vh;
-}
 
 .time-warning {
   color: var(--error-color) !important;

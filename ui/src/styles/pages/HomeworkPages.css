@@ -1,8 +1,4 @@
 /* Homework Pages Styles */
-.homework-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
 
 .homework-header {
   background-color: #fff;
@@ -17,9 +13,9 @@
 .progress-indicator {
   background-color: #e7f3ff;
   color: #007bff;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-weight: 600;
+  padding: var(--btn-padding-sm);
+  border-radius: var(--radius-lg);
+  font-weight: var(--font-weight-medium);
   font-size: 0.9rem;
 }
 
@@ -168,7 +164,7 @@
   padding: 2rem;
   border-radius: 12px;
   border: 1px solid #e9ecef;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-base);
   text-align: center;
   margin-top: 2rem;
   transition: transform 0.2s ease;
@@ -176,7 +172,7 @@
 
 .call-to-action-section:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-hover);
 }
 
 /* Default styling (homework style) */

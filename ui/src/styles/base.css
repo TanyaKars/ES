@@ -37,6 +37,42 @@
   --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
   --shadow-button: 0 6px 20px rgba(52, 152, 219, 0.3);
   --shadow-button-green: 0 6px 20px rgba(46, 204, 113, 0.3);
+
+  /* Typography */
+  --font-weight-normal: 400;
+  --font-weight-medium: 600;
+  --font-weight-bold: bold;
+
+  /* Transitions */
+  --transition-fast: all 0.2s ease;
+  --transition-smooth: all 0.3s ease;
+
+  /* Button Padding */
+  --btn-padding-sm: 0.5rem 1rem;
+  --btn-padding-md: 0.75rem 1.5rem;
+  --btn-padding-lg: 1rem 2rem;
+  --btn-padding-xl: 15px 30px;
+
+  /* Common Colors */
+  --color-white: #ffffff;
+  --color-white-alt: white;
+
+  /* Transform Values */
+  --transform-hover-sm: translateY(-1px);
+  --transform-hover-md: translateY(-2px);
+  --transform-hover-lg: translateY(-3px);
+  --transform-hover-xl: translateY(-5px);
+
+  /* Container Widths */
+  --container-sm: 500px;
+  --container-md: 800px;
+  --container-lg: 1200px;
+
+  /* Common Properties */
+  --cursor-pointer: pointer;
+
+  /* Media Breakpoints */
+  --breakpoint-mobile: 768px;
 }
 
 body {
@@ -55,11 +91,11 @@ body {
   background: var(--background-white);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-base);
-  transition: all 0.3s ease;
+  transition: var(--transition-smooth);
 }
 
 .card-hover:hover {
-  transform: translateY(-5px);
+  transform: var(--transform-hover-xl);
   box-shadow: var(--shadow-hover);
 }
 
@@ -75,7 +111,7 @@ body {
 .margin-bottom-xl { margin-bottom: var(--spacing-xl); }
 
 .container-centered {
-  max-width: 1200px;
+  max-width: var(--container-lg);
   margin: 0 auto;
   padding: var(--spacing-lg);
 }
@@ -87,36 +123,36 @@ body {
 .btn-base {
   border: none;
   border-radius: var(--radius-sm);
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 15px 30px;
+  font-weight: var(--font-weight-bold);
+  cursor: var(--cursor-pointer);
+  transition: var(--transition-smooth);
+  padding: var(--btn-padding-xl);
   font-size: 1.1rem;
 }
 
 .btn-primary {
   background: linear-gradient(45deg, var(--primary-blue), var(--primary-blue-dark));
-  color: white;
+  color: var(--color-white-alt);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
+  transform: var(--transform-hover-md);
   box-shadow: var(--shadow-button);
 }
 
 .btn-success {
   background: linear-gradient(45deg, var(--primary-green), var(--primary-green-light));
-  color: white;
+  color: var(--color-white-alt);
 }
 
 .btn-success:hover {
-  transform: translateY(-2px);
+  transform: var(--transform-hover-md);
   box-shadow: var(--shadow-button-green);
 }
 
 /* Common Styles */
 .container {
-  max-width: 1200px;
+  max-width: var(--container-lg);
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -124,14 +160,14 @@ body {
 /* Buttons */
 .btn {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
+  padding: var(--btn-padding-md);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: var(--font-weight-medium);
   text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  cursor: var(--cursor-pointer);
+  transition: var(--transition-fast);
   text-align: center;
 }
 
@@ -142,17 +178,17 @@ body {
 
 .btn-primary {
   background-color: #007bff;
-  color: white;
+  color: var(--color-white-alt);
 }
 
 .btn-primary:hover:not(:disabled) {
   background-color: #0056b3;
-  transform: translateY(-1px);
+  transform: var(--transform-hover-sm);
 }
 
 .btn-secondary {
   background-color: #6c757d;
-  color: white;
+  color: var(--color-white-alt);
 }
 
 .btn-secondary:hover:not(:disabled) {
@@ -167,11 +203,11 @@ body {
 
 .btn-outline:hover:not(:disabled) {
   background-color: #007bff;
-  color: white;
+  color: var(--color-white-alt);
 }
 
 .btn-large {
-  padding: 1rem 2rem;
+  padding: var(--btn-padding-lg);
   font-size: 1.1rem;
 }
 
@@ -180,13 +216,13 @@ body {
 }
 
 .btn-small {
-  padding: 0.5rem 1rem;
+  padding: var(--btn-padding-sm);
   font-size: 0.875rem;
 }
 
 .btn-danger {
   background-color: #dc3545;
-  color: white;
+  color: var(--color-white-alt);
 }
 
 .btn-danger:hover:not(:disabled) {
@@ -204,7 +240,7 @@ body {
 
 .btn-info {
   background-color: #17a2b8;
-  color: white;
+  color: var(--color-white-alt);
 }
 
 .btn-info:hover:not(:disabled) {

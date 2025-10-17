@@ -72,7 +72,7 @@
 
 .homework-btn {
   border: none;
-  padding: 15px 30px;
+  padding: var(--btn-padding-xl);
   border-radius: var(--radius-sm);
   font-size: 1.1rem;
   font-weight: bold;
