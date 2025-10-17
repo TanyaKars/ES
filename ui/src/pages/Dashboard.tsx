@@ -64,9 +64,19 @@ const Dashboard: React.FC = () => {
       testId: 'mouse-actions-course',
       progress: 0
     },
-     {
-      id: 'download/upload files',
+        {
+      id: 'shadow-dom',
       classNumber: 5,
+      title: 'Shadow DOM',
+      description: 'Learn to test elements within shadow DOMs',
+      icon: '🌑',
+      route: '/class/shadow-dom',
+      testId: 'shadow-dom-course',
+      progress: 0
+    },
+     {
+      id: 'download-upload-files',
+      classNumber: 6,
       title: 'Download/Upload Files',
       description: 'Learn to test file download and upload functionalities',
       icon: '📥',
@@ -74,16 +84,7 @@ const Dashboard: React.FC = () => {
       testId: 'download-upload-files-course',
       progress: 0
     },
-    {
-      id: 'shadow-dom',
-      classNumber: 6,
-      title: 'Shadow DOM',
-      description: 'Learn to test elements within shadow DOMs',
-      icon: '🕵️‍♂️',
-      route: '/class/shadow-dom',
-      testId: 'shadow-dom-course',
-      progress: 0
-    },
+
     {
       id: 'tables',
       classNumber: 7,
@@ -100,15 +101,22 @@ const Dashboard: React.FC = () => {
     // Check if user is logged in
     const userData = localStorage.getItem('user');
     if (!userData) {
-      navigate('/login');
+      // For development, create a mock user instead of redirecting
+      const mockUser = { email: 'demo@example.com', firstName: 'Demo', lastName: 'User' };
+      setUser(mockUser);
+      console.log('No user data found, using mock user for development');
       return;
     }
 
     try {
       const parsedUser = JSON.parse(userData);
       setUser(parsedUser);
+      console.log('User data loaded:', parsedUser);
     } catch (error) {
-      navigate('/login');
+      console.error('Error parsing user data:', error);
+      // For development, create a mock user instead of redirecting
+      const mockUser = { email: 'demo@example.com', firstName: 'Demo', lastName: 'User' };
+      setUser(mockUser);
     }
   }, [navigate]);
 

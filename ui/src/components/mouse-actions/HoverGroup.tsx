@@ -53,12 +53,6 @@ const HoverGroup: React.FC<HoverGroupProps> = ({
     onHover?.(hover.id, false);
   };
 
-  const resetHovers = () => {
-    setHoverStates({});
-    setHoverSequence([]);
-    setIsSequenceComplete(false);
-  };
-
   const getHoverStatus = (hover: HoverConfig) => {
     const isHovered = hoverStates[hover.id];
     const sequenceIndex = hoverSequence.indexOf(hover.id);

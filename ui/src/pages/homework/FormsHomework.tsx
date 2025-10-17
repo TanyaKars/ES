@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import HomeworkLayout from '../../components/homework/HomeworkLayout';
 import HomeworkResults from '../../components/homework/HomeworkResults';
 import CallToAction from '../../components/CallToAction.tsx';
-import HomeworkScenarioCard from '../../components/alert-elements/HomeworkScenarioCard.tsx';
 import InfoCard from '../../components/alert-elements/InfoCard';
 import { useAuth } from '../../hooks/useAuth';
 import { useHomeworkState } from '../../hooks/useHomeworkState';

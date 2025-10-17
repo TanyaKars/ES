@@ -83,12 +83,12 @@ export const callToActionConfigs = {
     buttonRoute: "/class/shadow-dom",
     buttonTestId: "next-class-button",
     containerTestId: "completion-section",
-    icon: "🖱️"
+    icon: "🎯"
   },
   shadowDomHomework: {
     title: "Ready for Homework?",
     description: "Perfect your shadow DOM handling skills with advanced interaction scenarios!",
-    buttonText: "Continue to Next Class: Mouse Actions →",
+    buttonText: "Start Shadow DOM Homework →",
     buttonRoute: "/homework/shadow-dom",
     buttonTestId: "homework-button",
     containerTestId: "homework-section"
@@ -97,11 +97,11 @@ export const callToActionConfigs = {
   shadowDomComplete: {
     title: "Assignment Complete!",
     description: "Outstanding! You've mastered shadow DOM testing. Ready for the final challenge?",
-    buttonText: "Start Shadow DOM Homework →",
-    buttonRoute: "/homework/shadow-dom",
+    buttonText: "Continue to Next Class: Mouse Actions →",
+    buttonRoute: "/class/download-upload-files",
     buttonTestId: "next-class-button",
     containerTestId: "completion-section",
-    icon: "🏆"
+    icon: "🎯"
   },
   downloadUploadFilesHomework: {
     title: "Ready for Homework?",
@@ -115,11 +115,11 @@ export const callToActionConfigs = {
   downloadUploadFilesComplete: {
     title: "Assignment Complete!",
     description: "Outstanding! You've mastered download/upload file testing. Ready for the final challenge?",
-    buttonText: "Continue to Next Class: Shadow DOM →",
-    buttonRoute: "/class/shadow-dom",
+    buttonText: "Continue to Next Class: Table →",
+    buttonRoute: "/class/table",
     buttonTestId: "next-class-button",
     containerTestId: "completion-section",
-    icon: "🏆"
+    icon: "🎯"
   },
 
   tableHomework: {
@@ -134,11 +134,11 @@ export const callToActionConfigs = {
   tableComplete: {
     title: "Assignment Complete!",
     description: "Outstanding! You've mastered table testing. Ready for the final challenge?",
-    buttonText: "Continue to Next Class: Mouse Actions →",
+    buttonText: "Continue to Next Class:  →",
     buttonRoute: "/class/mouse-actions",
     buttonTestId: "next-class-button",
     containerTestId: "completion-section",
-    icon: "🏆"
+    icon: "🎯"
   }
   
 } as const;

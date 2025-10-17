@@ -10,12 +10,15 @@ import FormsClass from './pages/classes/FormsClass.tsx';
 import AlertsClass from './pages/classes/AlertsClass.tsx';
 import IframesClass from './pages/classes/IframesClass.tsx';
 import MouseActionsClass from './pages/classes/MouseActionsClass.tsx';
+import ShadowDomClass from './pages/classes/ShadowDomClass.tsx';
+
 
 // Homework Pages
 import FormsHomework from './pages/homework/FormsHomework.tsx';
 import AlertsHomework from './pages/homework/AlertsHomework.tsx';
 import IframesHomework from './pages/homework/IframesHomework.tsx';
 import MouseActionsHomework from './pages/homework/MouseActionsHomework.tsx';
+import ShadowDomHomework from './pages/homework/ShadowDomHomework.tsx';
 
 // Iframe Examples
 import TextAreaExample from './pages/classes/iframes/examples/TextAreaExample.tsx';
@@ -42,12 +45,14 @@ const App: React.FC = () => {
           <Route path="/class/alerts" element={<AlertsClass />} />
           <Route path="/class/iframes" element={<IframesClass />} />
           <Route path="/class/mouse-actions" element={<MouseActionsClass />} />
+          <Route path="/class/shadow-dom" element={<ShadowDomClass />} />
           
           {/* Homework Routes */}
           <Route path="/homework/forms" element={<FormsHomework />} />
           <Route path="/homework/alerts" element={<AlertsHomework />} />
           <Route path="/homework/iframes" element={<IframesHomework />} />
           <Route path="/homework/mouse-actions" element={<MouseActionsHomework />} />
+          <Route path="/homework/shadow-dom" element={<ShadowDomHomework />} />
           
           {/* Iframe Examples */}
           <Route path="/class/iframes/examples/form" element={<FormExample />} />
