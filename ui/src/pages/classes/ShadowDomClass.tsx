@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import Header from '../../components/Header';
 import NavigationBar from '../../components/NavigationBar';
@@ -10,15 +10,20 @@ import '../../styles/pages/ClassPages.css';
 const ShadowDomClass: React.FC = () => {
   const { user, isLoading } = useAuth();
   const navigate = useNavigate();
+  const shadowHostRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Create real Shadow DOM after component mounts
-    const hostElement = document.getElementById('shadow-host');
-    if (hostElement && !hostElement.shadowRoot) {
-      try {
-        const shadowRoot = hostElement.attachShadow({ mode: 'open' });
-        
-        shadowRoot.innerHTML = `
+    let attemptCount = 0;
+    const maxAttempts = 10;
+    
+    const createShadowDOM = () => {
+      const hostElement = shadowHostRef.current || document.getElementById('shadow-host');
+      
+      if (hostElement && !hostElement.shadowRoot) {
+        try {
+          // Clear any existing content first
+          hostElement.innerHTML = '';
+          const shadowRoot = hostElement.attachShadow({ mode: 'open' });        shadowRoot.innerHTML = `
           <style>
             .shadow-container {
               background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -80,10 +85,26 @@ const ShadowDomClass: React.FC = () => {
             }, 3000);
           });
         }
-      } catch (error) {
-        console.error('Error creating Shadow DOM:', error);
+        } catch (error) {
+          console.error('Error creating Shadow DOM:', error);
+        }
+      } else if (attemptCount < maxAttempts) {
+        // If element not found, try again
+        attemptCount++;
+        setTimeout(createShadowDOM, 50);
       }
-    }
+    };
+
+    // Start creation after a small delay
+    const timer = setTimeout(createShadowDOM, 100);
+
+    return () => {
+      clearTimeout(timer);
+      // Clean up shadow DOM when component unmounts
+      if (shadowHostRef.current && shadowHostRef.current.shadowRoot) {
+        shadowHostRef.current.innerHTML = '';
+      }
+    };
   }, []);
 
   if (isLoading) {
@@ -135,7 +156,7 @@ const ShadowDomClass: React.FC = () => {
           <div className="example-box">
 
             <div className="shadow-demo">
-              <div id="shadow-host" data-testid="shadow-host"></div>
+              <div ref={shadowHostRef} id="shadow-host" data-testid="shadow-host"></div>
             </div>
           </div>
         </section>
